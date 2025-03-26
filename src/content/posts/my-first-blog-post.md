@@ -18,3 +18,4 @@ Welcome to my first blog post. Here's what you can expect:
 - Simplicity
 - Markdown
 - GitHub workflow
+- Done
