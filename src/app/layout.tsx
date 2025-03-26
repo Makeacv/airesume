@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     absolute: "AI Resume",
   },
   description:
-    "AI Resume Builder is the easiest way to create a professional resume that will help you land your dream job.",
+    "Makeacv.ai Builder is the easiest way to create a professional resume that will help you land your dream job.",
 };
 
 export default function RootLayout({
