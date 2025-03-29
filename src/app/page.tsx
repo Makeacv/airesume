@@ -3,21 +3,20 @@ import { Button } from "@/components/ui/button";
 import { Check, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import amazonLogo from "@/logos/amazon.svg";
-import appleLogo from "@/logos/apple.svg";
-import bookingLogo from "@/logos/booking.svg";
-import googleLogo from "@/logos/google.svg";
-import metaLogo from "@/logos/meta.svg";
-import amazonLogoDark from "@/logos/amazon-dark.svg";
-import metaLogoDark from "@/logos/meta-dark.svg";
-import appleLogoDark from "@/logos/apple-dark.svg";
-import googleLogoDark from "@/logos/google-dark.svg";
-import bookingLogoDark from "@/logos/booking-dark.svg";
-import ThemeToggle from "@/components/ThemeToggle"; 
 import flag from "@/app/(main)/avatars/flag.png";
 
+export const metadata: Metadata = {
+  title: {
+    template: "%s - AI Resume Builder",
+    absolute: "Free CV Builder South Africa | Fast & Easy AI Tool | Make A CV",
+  },
+  description:
+    "Create a professional CV in minutes with our free AI tool. It’s mobile-friendly and built for South Africans. No signup or credit card needed. Sign up now!",
+};
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { FileText, Send, Brain, Video, Globe } from "lucide-react"
+import { FileText, Send, Brain } from "lucide-react"
+import { Metadata } from "next";
 
 const stats = [
   { number: "98%", label: "More likely to get hired" },
@@ -26,34 +25,34 @@ const stats = [
 ];
 
 const companies = [
-  { 
-    name: "Amazon", 
-    logo: amazonLogo,
-    logoDark: amazonLogoDark,
+  {
+    name: "Career Junction",
+    logo: "/logos/careerjunction-white.png",
+    logoDark: "/logos/CAREERJUNCTION.png",
     url: "https://www.amazon.jobs" // or your desired link
   },
-  { 
-    name: "Meta", 
-    logo: metaLogo,
-    logoDark: metaLogoDark,
+  {
+    name: "Careers24",
+    logo: "/logos/careers24-white.png",
+    logoDark: "/logos/CAREERS24.png",
     url: "https://www.metacareers.com"
   },
-  { 
-    name: "Apple", 
-    logo: appleLogo,
-    logoDark: appleLogoDark,
+  {
+    name: "Indeed",
+    logo: "/logos/indeed-white.png",
+    logoDark: "/logos/INDEED.png",
     url: "https://www.apple.com/careers"
   },
-  { 
-    name: "Google", 
-    logo: googleLogo,
-    logoDark: googleLogoDark,
+  {
+    name: "LinkedIn",
+    logo: "/logos/linkedin-white1.png",
+    logoDark: "/logos/LINKEDIN.png",
     url: "https://careers.google.com"
   },
-  { 
-    name: "Booking.com", 
-    logo: bookingLogo,
-    logoDark: bookingLogoDark,
+  {
+    name: "PNET",
+    logo: "/logos/pnet-white1.png",
+    logoDark: "/logos/PNET.png",
     url: "https://careers.booking.com"
   },
 ];
@@ -101,141 +100,70 @@ const reviews = [
     rating: 5,
     date: "Feb 8, 2024"
   },
-  {
-    name: "Oliver B.",
-    role: "Graphic Designer",
-    content: "Finally, a resume builder that understands creative professionals! The templates are modern yet professional, and the AI helps showcase both technical and creative skills perfectly.",
-    rating: 5,
-    date: "Mar 10, 2024"
-  },
-  {
-    name: "Lisa M.",
-    role: "Healthcare Professional",
-    content: "The industry-specific keywords suggested by the AI were incredibly helpful. Secured interviews at top hospitals within weeks of using my new resume!",
-    rating: 5,
-    date: "Feb 25, 2024"
-  },
-  {
-    name: "Carlos R.",
-    role: "Business Analyst",
-    content: "The premium features are game-changing. The AI helped me highlight my data analysis achievements, and the export options made it easy to maintain consistent formatting.",
-    rating: 5,
-    date: "Mar 8, 2024"
-  }
 ];
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
-      {/* Navigation Bar */}
-      
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-black/80 backdrop-blur-sm border-b dark:border-gray-800">
-  <div className="mx-auto max-w-7xl px-4">
-    <div className="flex h-16 items-center justify-between">
-      
-      {/* Logo */}
-      <Link href="/" className="flex items-center gap-2">
-  {/* Light mode logo */}
-  <Image
-    src="/logo.png"
-    alt="Logo"
-    width={120}
-    height={40}
-    className="h-10 w-auto block dark:hidden"
-  />
-
-  {/* Dark mode logo */}
-  <Image
-    src="/logodark.png"
-    alt="Logo dark"
-    width={120}
-    height={40}
-    className="h-10 w-auto hidden dark:block"
-  />
-</Link>
-
-      {/* Centered Navigation Links */}
-
-      {/* CTA Buttons */}
-     {/* Navigation Items */}
-     
-<div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-300">
-<ThemeToggle />
-  <Link href="/resumes" className="hover:text-orange-500 transition">Home</Link>
-  <Link href="/blog" className="hover:text-orange-500 transition">Blog</Link>
-  <Link href="/about" className="hover:text-orange-500 transition">About</Link>
-  <Link href="/contact" className="hover:text-orange-500 transition">Contact</Link>
-
-  {/* Spacer */}
-  <div className="ml-1 flex items-center gap-4">
-    <Link href="/resumes">
-      <Button variant="ghost">Sign in</Button>
-    </Link>
-    <Link href="/resumes">
-      <Button variant="premium">Get Started</Button>
-    </Link>
-  </div>
-</div>
-    </div>
-  </div>
-</nav>
-
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-gray-100 to-white dark:from-black dark:via-gray-900 dark:to-black px-4 pt-24 pb-12">
-        <div className="container mx-auto flex flex-col items-center gap-6 md:flex-row">
-          <div className="flex-1 space-y-4 text-center md:text-left">
-            <div className="space-y-2">
-              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl dark:text-white">
-                Create 
+        <div className="container mx-auto flex flex-col items-center gap-6 md:flex-row 2xl:px-40 xl:px-24 lg:px-16">
+          <div className="flex-1 space-y-4 text-center md:text-left max-md:my-10">
+            <div className="space-y-2 max-md:space-y-0">
+              <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight dark:text-white max-md:text-left">
+                Create
               </h1>
-              <div className="flex justify-center md:justify-start">
-                <span className="block text-3xl font-extrabold sm:text-4xl md:text-5xl bg-gradient-to-r from-[#FB6520] to-[#FB6520] bg-clip-text text-transparent">
+              <div className="flex justify-start md:justify-start max-lg:text-left">
+                <span className="block text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold bg-gradient-to-r from-[#FB6520] to-[#FB6520] bg-clip-text text-transparent">
                   Your Perfect CV
                 </span>
               </div>
-              <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl dark:text-white">
+              <h1 className="text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight dark:text-white max-md:text-left">
                 In Under 2 Minutes
               </h1>
             </div>
 
-            <p className="text-xl text-gray-600 dark:text-gray-300 mt-4">
-              Design a standout professional CV with our AI builder. It&apos;s Easy, Fast and Free.
-            </p>
+            <div>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 mt-4 max-md:text-left">
+                Design a standout professional CV with our AI builder.
+              </p>
+              <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-md:text-left">
+                It&apos;s Easy, Fast and Free.
+              </p>
+            </div>
 
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-center mt-2">
+            <div className="flex flex-row gap-2 sm:items-center sm:justify-start mt-2 items-center ">
               <Link href="/resumes" className="min-w-[100px]">
-                <Button 
-                  size="lg" 
-                  className="w-full bg-[#FB6520] text-white hover:bg-[#FB6520] transition-colors"
+                <Button
+                  size="lg"
+                  className="w-40 bg-[#FB6520] text-white hover:bg-[#FB6520] transition-colors"
                 >
                   Get Started Free
                 </Button>
               </Link>
               <p className="text-sm text-muted-foreground">No credit card required</p>
             </div>
-            
-           {/* Trust Indicators */}
-<div className="flex items-center justify-center gap-2 md:justify-start mt-2">
-  <div className="flex -space-x-2">
 
-    {/* 🇿🇦 Flag */}
-    <div className="relative h-8 w-8 rounded-full border-2 border-white ring-1 ring-gray-200 overflow-hidden">
-      <Image
-        src={flag}
-        alt="South African Flag"
-        fill
-        className="object-cover"
-      />
-    </div>
-  </div>
+            {/* Trust Indicators */}
+            <div className="flex items-center justify-start gap-2 md:justify-start mt-2">
+              <div className="flex -space-x-2">
+                {/* 🇿🇦 Flag */}
+                <div className="relative h-8 w-8 rounded-full border-2 border-white ring-1 ring-gray-200 overflow-hidden">
+                  <Image
+                    src={flag}
+                    alt="South African Flag"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
 
-  <p className="text-sm text-gray-600 dark:text-gray-400">
-    Trusted by South Africans alike. 
-  </p>
-</div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                Trusted by South Africans alike.
+              </p>
+            </div>
+          </div>
 
-</div>
-          
           {/* Preview Image */}
           <div className="relative flex-1 mt-6 md:mt-0 md:max-w-[450px]">
             <div className="absolute -inset-1 bg-gradient-to-r from-[#FB6520] to-[#FB6530] opacity-30 blur"></div>
@@ -249,11 +177,10 @@ export default function Home() {
         </div>
       </section>
 
-
-         {/* How It Works Section */}
-         <section className="bg-white dark:bg-black py-16">
+      {/* How It Works Section */}
+      <section className="bg-white dark:bg-black py-16">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-6 dark:text-white">How It Works</h2>
+          <h2 className="text-3xl sm:text-3xl text-center md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">How It Works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
               <Brain className="mx-auto mb-4 h-12 w-12 text-[#FB6520]" />
@@ -275,51 +202,47 @@ export default function Home() {
         </div>
       </section>
 
-{/* Looking for Work Section */}
-<section className="bg-white dark:bg-black py-20">
-  <div className="max-w-7xl mx-auto px-4">
-    
-    {/* ✅ Section Title */}
-    <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-      Looking for Work?
-    </h2>
+      {/* Looking for Work Section */}
+      <section className="bg-white dark:bg-black py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Grid layout: Left text + Right image */}
+          <div className="grid md:grid-cols-2 items-center gap-12">
+            {/* Left Column: Text */}
+            <div>
+              <h2 className="text-3xl sm:text-4xl md:text-4xl mb-6 font-bold text-gray-900 dark:text-white">
+                Create Your CV the Smart Way
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-justify text-gray-700 dark:text-gray-300 mb-4">
+                Let&apos;s be honest — writing a CV can be stressful and confusing,
+                especially when you are not sure what to say or how it should look.
+                But if you want to land a job, you need one. A solid CV is your foot
+                in the door, your first impression, and the first thing employers look at.
+              </p>
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-justify text-gray-700 dark:text-gray-300">
+                That&apos;s why we built <span className="font-bold">makeacv.ai</span> — to make the whole process quick,
+                easy, and 100% free for anyone in Africa. No typing from scratch,
+                no fancy skills needed. Just answer a few simple questions and in under
+                2 minutes, our smart AI creates a professional CV for you. Download it,
+                apply for jobs, and get noticed. It works on your phone, doesn&apos;t cost a
+                cent, and there&apos;s zero sign-up needed. Just your best chance at landing
+                the job — made easy.
+              </p>
+            </div>
 
-    {/* Grid layout: Left Text + Right Image */}
-    <div className="grid md:grid-cols-2 items-center gap-12">
-      
-      {/* Left: Text Content */}
-      <div>
-        <p className="text-gray-700 dark:text-gray-300 mb-4">
-          Let Make a CV help you create a standout resume that gets noticed.
-        </p>
-        <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
-          <li>Build your CV in just minutes</li>
-          <li>Download in PDF format instantly</li>
-          <li>No experience or login required</li>
-        </ul>
-        <div className="mt-6">
-          <a
-            href="/resumes"
-            className="inline-block bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-600 transition"
-          >
-            Start Now – It&apos;s Free
-          </a>
+            {/* Right Column: Image */}
+            <div className="flex justify-center">
+              <Image
+                src="/looking_for_work.png" // Replace with your actual image path
+                alt="Laptop showing a CV example"
+                width={550}
+                height={400}
+                quality={100}
+                className="rounded-lg shadow-lg object-cover"
+              />
+            </div>
+          </div>
         </div>
-      </div>
-
-      {/* Right: Image */}
-      <div className="flex justify-center">
-        <Image
-          src="/jobseeker.png" // ✅ Replace with your real image
-          alt="Job Seeker Example"
-          width={350}
-          height={350}
-          className="rounded-xl shadow-lg object-contain"
-        />
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Company Logos Section */}
       <section className="border-y dark:border-gray-800 bg-white dark:bg-black py-12">
@@ -328,94 +251,74 @@ export default function Home() {
             Our customers have been hired at:
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
-  {companies.map((company) => (
-    <a
-      key={company.name}
-      href={company.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="relative h-16 w-40 transition-transform hover:scale-105"
-    >
-      <Image
-        src={company.logo}
-        alt={`${company.name} logo`}
-        fill
-        className="object-contain dark:hidden"
-        priority
-      />
-      <Image
-        src={company.logoDark}
-        alt={`${company.name} logo`}
-        fill
-        className="hidden object-contain dark:block"
-        priority
-      />
-    </a>
-  ))}
+            {companies.map((company) => (
+              <a
+                key={company.name}
+                href={company.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative h-16 w-40 transition-transform hover:scale-105 "
+              >
+                <Image
+                  src={company.logo}
+                  alt={`${company.name} logo`}
+                  fill
+                  className="object-contain dark:hidden"
+                  priority
+                />
+                <Image
+                  src={company.logoDark}
+                  alt={`${company.name} logo`}
+                  fill
+                  className="hidden object-contain dark:block"
+                  priority
+                />
+              </a>
+            ))}
           </div>
         </div>
       </section>
 
-
       {/* Recruitment Companies Section */}
-{/* Recruitment Companies Section */}
-<section className="bg-gray-50 dark:bg-black py-20">
-  <div className="max-w-7xl mx-auto px-4">
+      <section className="bg-white dark:bg-black py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          {/* Grid layout: Left text + Right image */}
+          <div className="grid md:grid-cols-2 items-center gap-12">
+            {/* Left Column: Image */}
+            <div className="flex justify-center">
+              <Image
+                src="/recruitment_companies.png" // Replace with your actual image path
+                alt="Laptop showing a CV example"
+                width={550}
+                height={400}
+                quality={100}
+                className="rounded-lg shadow-lg object-cover"
+              />
+            </div>
 
-    {/* Section Title */}
-    <h2 className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-      Recruitment Companies & Employers
-    </h2>
-
-    {/* Grid layout: Left Text + Right Image */}
-    <div className="grid md:grid-cols-2 items-center gap-12">
-
-      {/* Image */}
-      <div className="flex justify-center">
-        <Image
-          src="/recruiters.png" // Replace with your recruiter/company image
-          alt="Recruitment Example"
-          width={350}
-          height={350}
-          className="rounded-xl shadow-lg object-contain"
-        />
-      </div>
-
-      {/* right: Text Content */}
-      <div>
-        <p className="text-gray-700 dark:text-gray-300 mb-4">
-          Are you hiring? Partner with Make a CV to access job seekers with ready-to-use, professional resumes.
-        </p>
-        <ul className="list-disc pl-5 space-y-2 text-gray-700 dark:text-gray-300">
-          <li>Receive polished, AI-enhanced CVs</li>
-          <li>Save time with standardized formats</li>
-          <li>Connect with job seekers across industries</li>
-        </ul>
-        <div className="mt-6">
-          <a
-            href="/contact"
-            className="inline-block bg-orange-500 text-white px-6 py-3 rounded-md hover:bg-orange-600 transition"
-          >
-            Partner With Us
-          </a>
+            {/* Right Column: Text */}
+            <div>
+              <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
+                Power Up Your CV Services with AI
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-justify text-gray-700 dark:text-gray-300 mb-4">
+                If you are a recruiter, career coach, or someone who helps others build CVs — <span className="font-bold">makeacv.ai</span> is the tool you&apos;ve been waiting for. Create professional, job-ready CVs for your clients in just minutes. Our smart AI does the heavy lifting — no formatting stress, no wasted time. With our premium package, you can save and manage multiple CVs, edit them anytime, and keep everything organised in one place. It’s fast, efficient, and built to help you deliver more value, in less time. Whether you’re working with students, job seekers, or professionals — we help you help them.
+              </p>
+            </div>
+          </div>
         </div>
-      </div>
-
-      
-
-    </div>
-  </div>
-</section>
+      </section>
+      {/* Recruitment Companies Section */}
 
       {/* Customer Reviews Section */}
       <section className="py-20 bg-gray-50 dark:bg-gradient-to-b dark:from-black dark:via-gray-900 dark:to-black">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4 dark:text-white">What Our Users Say</h2>
+          <h2 className="text-3xl sm:text- text-center md:text-4xl font-bold text-gray-900 dark:text-white">What Our Users Say</h2>
           <p className="text-gray-600 dark:text-gray-300 text-center mb-12">Join thousands of successful job seekers</p>
-          
+
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {reviews.map((review, index) => (
-              <div 
+              <div
                 key={index}
                 className="bg-white dark:bg-black/40 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow dark:border dark:border-gray-800 backdrop-blur-sm"
               >
@@ -430,13 +333,13 @@ export default function Home() {
                     <p className="text-sm text-gray-600 dark:text-gray-400">{review.role}</p>
                   </div>
                 </div>
-                
+
                 <div className="flex gap-1 mb-3">
                   {Array(review.rating).fill(0).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                
+
                 <p className="text-gray-600 dark:text-gray-300 mb-3">{review.content}</p>
                 <p className="text-sm text-gray-400 dark:text-gray-500">{review.date}</p>
               </div>
@@ -460,10 +363,10 @@ export default function Home() {
       </section>
 
       {/* Pricing Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gradient-to-b dark:from-black dark:via-gray-900 dark:to-black">
+      <section id="pricing" className="py-20 bg-gray-50 dark:bg-gradient-to-b dark:from-black dark:via-gray-900 dark:to-black">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 dark:text-white">Simple, Transparent Pricing</h2>
+            <h2 className="text-3xl text-center sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">Simple, Transparent Pricing</h2>
             <p className="text-gray-600 dark:text-gray-300">Choose the plan that&apos;s right for you</p>
           </div>
 
@@ -476,7 +379,7 @@ export default function Home() {
                 <span className="text-4xl font-bold dark:text-white">$9.99</span>
                 <span className="text-gray-600 dark:text-gray-400">/month</span>
               </div>
-              <ul className="space-y-4 mb-6">
+              <ul className="space-y-4 mb-16">
                 {[
                   "Create & download resumes",
                   "Limited to 2 resumes",
@@ -490,7 +393,7 @@ export default function Home() {
                 ))}
               </ul>
               <Link href="/resumes" className="block">
-                <Button className="w-full bg-[#FB6520] text-white hover:bg-[#FB6520]">
+                <Button className="w-full bottom-0 bg-[#FB6520] text-white hover:bg-[#FB6520]">
                   Get Started
                 </Button>
               </Link>
@@ -534,9 +437,8 @@ export default function Home() {
       {/* FAQ Section */}
       <section className="py-20 bg-white dark:bg-black">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-4 dark:text-white">Frequently Asked Questions</h2>
+          <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold text-center text-gray-900 dark:text-white">Frequently Asked Questions</h2>
           <p className="text-gray-600 dark:text-gray-300 text-center mb-12">Everything you need to know about our platform</p>
-          
           <div className="max-w-3xl mx-auto grid gap-6">
             {[
               {
@@ -556,7 +458,7 @@ export default function Home() {
                 a: "Absolutely! All our templates are designed to pass Applicant Tracking Systems (ATS) with flying colors."
               }
             ].map((faq, index) => (
-              <div 
+              <div
                 key={index}
                 className="border dark:border-gray-800 rounded-lg p-6 bg-gray-50 dark:bg-black/40 backdrop-blur-sm"
               >
@@ -577,8 +479,8 @@ export default function Home() {
           <p className="mb-8 text-lg text-white/90 max-w-2xl mx-auto">
             Join 150,000+ professionals who trust our platform
           </p>
-          <Button 
-            size="lg" 
+          <Button
+            size="lg"
             className="min-w-[200px] bg-white text-black hover:bg-gray-100 transition-all duration-300"
           >
             <Link href="/resumes">
