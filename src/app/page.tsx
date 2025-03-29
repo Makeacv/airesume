@@ -29,31 +29,31 @@ const companies = [
     name: "Career Junction",
     logo: "/logos/careerjunction-white.png",
     logoDark: "/logos/CAREERJUNCTION.png",
-    url: "https://www.amazon.jobs" // or your desired link
+    url: "https://www.careerjunction.co.za/" // or your desired link
   },
   {
     name: "Careers24",
     logo: "/logos/careers24-white.png",
     logoDark: "/logos/CAREERS24.png",
-    url: "https://www.metacareers.com"
+    url: "https://www.careers24.com/"
   },
   {
     name: "Indeed",
     logo: "/logos/indeed-white.png",
     logoDark: "/logos/INDEED.png",
-    url: "https://www.apple.com/careers"
+    url: "https://za.indeed.com/"
   },
   {
     name: "LinkedIn",
     logo: "/logos/linkedin-white1.png",
     logoDark: "/logos/LINKEDIN.png",
-    url: "https://careers.google.com"
+    url: "https://za.linkedin.com/jobs"
   },
   {
     name: "PNET",
     logo: "/logos/pnet-white1.png",
     logoDark: "/logos/PNET.png",
-    url: "https://careers.booking.com"
+    url: "https://www.pnet.co.za/"
   },
 ];
 
