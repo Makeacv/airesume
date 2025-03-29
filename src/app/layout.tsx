@@ -1,6 +1,5 @@
 import { Toaster } from "@/components/ui/toaster";
 import { ClerkProvider } from "@clerk/nextjs";
-import type { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import Script from "next/script";
@@ -9,16 +8,17 @@ import Footer from "@/components/Footer";
 
 
 import LayoutWithNavbar from "@/components/layout/LayoutWithNavbar"; // ✅ new wrapper
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
     template: "%s - AI Resume Builder",
-    absolute: "AI Resume",
+    absolute: "Free CV Builder South Africa | Fast & Easy AI Tool | Make A CV",
   },
   description:
-    "Makeacv.ai Builder is the easiest way to create a professional resume that will help you land your dream job.",
+    "Create a professional CV in minutes with our free AI tool. It’s mobile-friendly and built for South Africans. No signup or credit card needed. Sign up now!",
 };
 
 export default function RootLayout({
@@ -42,6 +42,7 @@ export default function RootLayout({
               gtag('config', 'G-G92NEJQXZG');
             `}
           </Script>
+          <link rel="icon" href="/favicon.ico" sizes="any" />
         </head>
         <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

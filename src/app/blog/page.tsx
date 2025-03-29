@@ -20,33 +20,33 @@ export default function BlogPage() {
   const filenames = fs.readdirSync(postsDirectory);
 
   const posts = filenames
-  .map((filename) => {
-    const filePath = path.join(postsDirectory, filename);
-    const fileContents = fs.readFileSync(filePath, 'utf8');
-    const { data } = matter(fileContents);
+    .map((filename) => {
+      const filePath = path.join(postsDirectory, filename);
+      const fileContents = fs.readFileSync(filePath, 'utf8');
+      const { data } = matter(fileContents);
 
-    if (!data.slug || !data.title || !data.date) return null;
+      if (!data.slug || !data.title || !data.date) return null;
 
-    // Check if image exists in /public
-    const publicImagePath = path.join(process.cwd(), 'public', (data.image || '').replace(/^\//, ''));
-    const imageExists = data.image && fs.existsSync(publicImagePath);
-    const imagePath = imageExists ? data.image : "/thumbnails/default.png";
+      // Check if image exists in /public
+      const publicImagePath = path.join(process.cwd(), 'public', (data.image || '').replace(/^\//, ''));
+      const imageExists = data.image && fs.existsSync(publicImagePath);
+      const imagePath = imageExists ? data.image : "/thumbnails/default.png";
 
-    return {
-      title: data.title,
-      date: data.date,
-      slug: data.slug,
-      description: data.description || "",
-      image: imagePath,
-      author: data.author || "Unknown",
-      tags: data.tags || [],
-    };
-  })
-  .filter(Boolean) as Post[]; // ✅ Cast after filtering
+      return {
+        title: data.title,
+        date: data.date,
+        slug: data.slug,
+        description: data.description || "",
+        image: imagePath,
+        author: data.author || "Unknown",
+        tags: data.tags || [],
+      };
+    })
+    .filter(Boolean) as Post[]; // ✅ Cast after filtering
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-20">
-      <h1 className="text-4xl font-bold text-orange-500 mb-10">Blog</h1>
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-500 mb-6">Blog</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {posts.map((post) => (
@@ -60,16 +60,16 @@ export default function BlogPage() {
                 className="w-full h-48 object-cover"
               />
               <div className="p-5">
-  <h2 className="text-xl font-semibold text-orange-500 mb-1">{post.title}</h2>
+                <h2 className="text-xl font-semibold text-orange-500 mb-1">{post.title}</h2>
 
-  <p className="text-sm text-gray-500 dark:text-zinc-400 mb-2">
-    {post.date}
-  </p>
+                <p className="text-sm text-gray-500 dark:text-zinc-400 mb-2">
+                  {post.date}
+                </p>
 
-  <p className="text-gray-800 dark:text-zinc-100 text-base line-clamp-3">
-    {post.description}
-  </p>
-</div>
+                <p className="text-gray-800 dark:text-zinc-100 text-base line-clamp-3">
+                  {post.description}
+                </p>
+              </div>
             </div>
           </Link>
         ))}

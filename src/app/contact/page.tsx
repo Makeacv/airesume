@@ -3,8 +3,8 @@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import Head from "next/head";
 import { useSearchParams } from "next/navigation";
+import { Mail, Phone } from "lucide-react";
 
 export default function ContactPage() {
   const searchParams = useSearchParams();
@@ -12,29 +12,27 @@ export default function ContactPage() {
 
   return (
     <>
-      <Head>
-        <title>Contact Us | We&apos;re Here to Help You – Make A CV</title>
-        <meta
-          name="description"
-          content="Have questions or need support? Get in touch with the Make A CV team. We're here to help you build better CVs, faster – Make A CV."
-        />
-      </Head>
-
-      <main className="max-w-3xl mx-auto py-20 px-4">
-        <h1 className="text-3xl font-bold mb-4 text-center">Get in Touch</h1>
-        <p className="text-muted-foreground text-center mb-8">
-          Got a question, feedback, or need help with your CV? We&apos;re here for you! Whether you&apos;re a job
-          seeker needing support, a recruiter using our premium tools, or just curious about how Make A
-          CV works — don’t hesitate to reach out.
+      <main className="max-w-3xl mx-auto px-4 py-24">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-500 mb-6">
+          Get in Touch
+        </h1>
+        <p className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-zinc-300 mb-6 text-justify">
+          Got a question, feedback, or need help with your CV? We&apos;re here for you! Whether you&apos;re a job seeker needing support, a recruiter using our premium tools, or just curious about how Make A CV works — don&apos;t hesitate to reach out.
         </p>
 
-        <div className="mb-10 text-center space-y-1">
-          <p className="text-sm">
-            📞 <a className="text-orange-500 hover:underline" href="tel:+27218510119">+27 21 851 0119</a>
-          </p>
-          <p className="text-sm">
-            📧 <a className="text-orange-500 hover:underline" href="mailto:info@makeacv.co.za">info@makeacv.co.za</a>
-          </p>
+        <div className="mb-10 text-center space-y-2">
+          <div className="flex items-center justify-start gap-2 text-sm sm:text-base">
+            <Phone className="w-4 h-4" />
+            <a className="text-orange-500 hover:underline" href="tel:+27218510119">
+              +27 21 851 0119
+            </a>
+          </div>
+          <div className="flex items-center justify-start gap-2 text-sm sm:text-base">
+            <Mail className="w-4 h-4" />
+            <a className="text-orange-500 hover:underline" href="mailto:info@makeacv.co.za">
+              info@makeacv.co.za
+            </a>
+          </div>
         </div>
 
         {!submitted ? (
