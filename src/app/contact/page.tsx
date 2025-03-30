@@ -16,7 +16,7 @@ export default function ContactPage() {
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-500 mb-6">
           Get in Touch
         </h1>
-        <p className="text-sm sm:text-base md:text-lg text-gray-800 dark:text-zinc-300 mb-6 text-justify">
+        <p className="text-gray-800 dark:text-zinc-300 mb-6 text-justify">
           Got a question, feedback, or need help with your CV? We&apos;re here for you! Whether you&apos;re a job seeker needing support, a recruiter using our premium tools, or just curious about how Make A CV works — don&apos;t hesitate to reach out.
         </p>
 
