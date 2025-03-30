@@ -7,7 +7,7 @@ import flag from "@/app/(main)/avatars/flag.png";
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - AI Resume Builder",
+    template: "%s - AI CV Builder",
     absolute: "Free CV Builder South Africa | Fast & Easy AI Tool | Make A CV",
   },
   description:
@@ -21,7 +21,7 @@ import { Metadata } from "next";
 const stats = [
   { number: "98%", label: "More likely to get hired" },
   { number: "150K+", label: "Satisfied customers" },
-  { number: "10%", label: "Better pay with our AI resume builder" },
+  { number: "10%", label: "Better pay with our AI CV builder" },
 ];
 
 const companies = [
@@ -61,42 +61,42 @@ const reviews = [
   {
     name: "David L.",
     role: "Software Developer",
-    content: "Resume Pro's AI features helped me highlight my technical skills perfectly. The smart suggestions for keywords got my resume past ATS systems, and I landed interviews at three top tech companies!",
+    content: "CV Pro's AI features helped me highlight my technical skills perfectly. The smart suggestions for keywords got my CV past ATS systems, and I landed interviews at three top tech companies!",
     rating: 5,
     date: "Feb 15, 2024"
   },
   {
     name: "Rachel S.",
     role: "Marketing Manager",
-    content: "The premium templates are worth every penny. I was able to create a stunning resume that stood out from the crowd. The AI writing assistant helped me quantify my achievements brilliantly.",
+    content: "The premium templates are worth every penny. I was able to create a stunning CV that stood out from the crowd. The AI writing assistant helped me quantify my achievements brilliantly.",
     rating: 5,
     date: "Mar 1, 2024"
   },
   {
     name: "Michael P.",
     role: "Recent Graduate",
-    content: "As a fresh graduate, I was struggling to create my first professional resume. Resume Pro's AI suggestions helped me transform my academic projects into compelling professional experiences.",
+    content: "As a fresh graduate, I was struggling to create my first professional CV. CV Pro's AI suggestions helped me transform my academic projects into compelling professional experiences.",
     rating: 5,
     date: "Jan 28, 2024"
   },
   {
     name: "Emma T.",
     role: "Career Switcher",
-    content: "Switching from teaching to UX design seemed daunting, but Resume Pro helped me translate my transferable skills perfectly. The AI tool knew exactly how to phrase my experience for tech companies.",
+    content: "Switching from teaching to UX design seemed daunting, but CV Pro helped me translate my transferable skills perfectly. The AI tool knew exactly how to phrase my experience for tech companies.",
     rating: 5,
     date: "Feb 20, 2024"
   },
   {
     name: "James W.",
     role: "Sales Executive",
-    content: "The custom color schemes and formatting options helped my resume stand out while staying professional. Already recommended Resume Pro to my entire sales team!",
+    content: "The custom color schemes and formatting options helped my CV stand out while staying professional. Already recommended CV Pro to my entire sales team!",
     rating: 5,
     date: "Mar 5, 2024"
   },
   {
     name: "Nina K.",
     role: "Project Manager",
-    content: "The ability to create multiple versions of my resume for different roles is fantastic. The AI suggestions for each job application are spot-on. Worth every penny of the premium subscription!",
+    content: "The ability to create multiple versions of my CV for different roles is fantastic. The AI suggestions for each job application are spot-on. Worth every penny of the premium subscription!",
     rating: 5,
     date: "Feb 8, 2024"
   },
@@ -138,7 +138,7 @@ export default function Home() {
                   size="lg"
                   className="w-40 bg-[#FB6520] text-white hover:bg-[#FB6520] transition-colors"
                 >
-                  Get Started Free
+                  Get Started For Free
                 </Button>
               </Link>
               <p className="text-sm text-muted-foreground">No credit card required</p>
@@ -169,7 +169,7 @@ export default function Home() {
             <div className="absolute -inset-1 bg-gradient-to-r from-[#FB6520] to-[#FB6530] opacity-30 blur"></div>
             <Image
               src={resumePreview}
-              alt="Resume preview"
+              alt="CV preview"
               width={450}
               className="relative rounded-lg shadow-xl transition-all hover:scale-105"
             />
@@ -212,13 +212,13 @@ export default function Home() {
               <h2 className="text-3xl sm:text-4xl md:text-4xl mb-6 font-bold text-gray-900 dark:text-white">
                 Create Your CV the Smart Way
               </h2>
-              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-justify text-gray-700 dark:text-gray-300 mb-4">
+              <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-justify mb-4">
                 Let&apos;s be honest — writing a CV can be stressful and confusing,
                 especially when you are not sure what to say or how it should look.
                 But if you want to land a job, you need one. A solid CV is your foot
                 in the door, your first impression, and the first thing employers look at.
               </p>
-              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-justify text-gray-700 dark:text-gray-300">
+              <p className="leading-relaxed text-justify text-gray-600 dark:text-gray-400">
                 That&apos;s why we built <span className="font-bold">makeacv.ai</span> — to make the whole process quick,
                 easy, and 100% free for anyone in Africa. No typing from scratch,
                 no fancy skills needed. Just answer a few simple questions and in under
@@ -247,9 +247,9 @@ export default function Home() {
       {/* Company Logos Section */}
       <section className="border-y dark:border-gray-800 bg-white dark:bg-black py-12">
         <div className="container mx-auto px-4">
-          <h3 className="mb-8 text-center text-xl font-medium text-gray-600 dark:text-gray-300">
-            Our customers have been hired at:
-          </h3>
+          <h2 className="text-3xl sm:text- text-center md:text-4xl font-bold text-gray-900 dark:text-white mb-12">
+            Apply now at these South African Job Portals
+          </h2>
           <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
             {companies.map((company) => (
               <a
@@ -301,7 +301,7 @@ export default function Home() {
               <h2 className="text-3xl sm:text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">
                 Power Up Your CV Services with AI
               </h2>
-              <p className="text-sm sm:text-base md:text-lg leading-relaxed text-justify text-gray-700 dark:text-gray-300 mb-4">
+              <p className="leading-relaxed text-justify text-gray-600 dark:text-gray-400 mb-4">
                 If you are a recruiter, career coach, or someone who helps others build CVs — <span className="font-bold">makeacv.ai</span> is the tool you&apos;ve been waiting for. Create professional, job-ready CVs for your clients in just minutes. Our smart AI does the heavy lifting — no formatting stress, no wasted time. With our premium package, you can save and manage multiple CVs, edit them anytime, and keep everything organised in one place. It’s fast, efficient, and built to help you deliver more value, in less time. Whether you’re working with students, job seekers, or professionals — we help you help them.
               </p>
             </div>
@@ -340,7 +340,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                <p className="text-gray-600 dark:text-gray-300 mb-3">{review.content}</p>
+                <p className="text-gray-600 dark:text-gray-400 mb-3">{review.content}</p>
                 <p className="text-sm text-gray-400 dark:text-gray-500">{review.date}</p>
               </div>
             ))}
@@ -381,8 +381,8 @@ export default function Home() {
               </div>
               <ul className="space-y-4 mb-16">
                 {[
-                  "Create & download resumes",
-                  "Limited to 2 resumes",
+                  "Create & download cvs",
+                  "Limited to 2 cvs",
                   "ATS-friendly",
                   "PDF download",
                 ].map((feature, i) => (
@@ -413,9 +413,9 @@ export default function Home() {
               <ul className="space-y-4 mb-6">
                 {[
                   "Everything in Basic",
-                  "Infinite resumes",
+                  "Infinite CVs",
                   "Design customizations",
-                  "AI-Powered Resume Builder",
+                  "AI-Powered CV Builder",
                   "Priority support",
                 ].map((feature, i) => (
                   <li key={i} className="flex items-center gap-2 dark:text-gray-300">
@@ -442,19 +442,19 @@ export default function Home() {
           <div className="max-w-3xl mx-auto grid gap-6">
             {[
               {
-                q: "How does the AI resume builder work?",
-                a: "Our AI analyzes your experience and skills to create tailored, ATS-friendly resumes. It suggests improvements and formats everything professionally."
+                q: "How does the AI CV builder work?",
+                a: "Our AI analyzes your experience and skills to create tailored, ATS-friendly CVs. It suggests improvements and formats everything professionally."
               },
               {
                 q: "Is it really free to get started?",
-                a: "Yes! You can create your first resume completely free. No credit card required to get started."
+                a: "Yes! You can create your first CV completely free. No credit card required to get started."
               },
               {
-                q: "Can I export my resume to PDF?",
-                a: "Yes, you can export your resume to PDF. The exports are high-quality and print-ready."
+                q: "Can I export my CV to PDF?",
+                a: "Yes, you can export your CV to PDF. The exports are high-quality and print-ready."
               },
               {
-                q: "Will my resume be ATS-friendly?",
+                q: "Will my CV be ATS-friendly?",
                 a: "Absolutely! All our templates are designed to pass Applicant Tracking Systems (ATS) with flying colors."
               }
             ].map((faq, index) => (
@@ -484,7 +484,7 @@ export default function Home() {
             className="min-w-[200px] bg-white text-black hover:bg-gray-100 transition-all duration-300"
           >
             <Link href="/resumes">
-              Get Started Free
+              Get Started for Free
             </Link>
           </Button>
         </div>
