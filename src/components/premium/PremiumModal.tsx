@@ -48,54 +48,62 @@ export default function PremiumModal() {
       }}
     >
       <DialogContent className="max-w-2xl">
-        <DialogHeader>
+  <DialogHeader>
     <DialogTitle className="text-center text-xl font-bold">
       Land your dream job with CV Builder AI
     </DialogTitle>
   </DialogHeader>
+
   <div className="space-y-6 text-center">
     <p>Unlock powerful AI features to create a standout CV that gets you noticed.</p>
+
     <div className="flex">
-      <div className="flex w-1/2 flex-col space-y-5">
-        <h3 className="text-center text-lg font-bold">Basic</h3>
-        <ul className="list-inside space-y-2">
-          {premiumFeatures.map((feature) => (
-            <li key={feature} className="flex items-center gap-2">
-              <Check className="size-4 text-blue-500" />
-              {feature}
-            </li>
-          ))}
-        </ul>
-        <Button disabled className="cursor-default">
-          Free
-        </Button>
+      {/* Wrap the 3 sibling elements */}
+      <div className="flex w-full">
+        {/* Basic */}
+        <div className="flex w-1/2 flex-col space-y-5">
+          <h3 className="text-center text-lg font-bold">Basic</h3>
+          <ul className="list-inside space-y-2">
+            {premiumFeatures.map((feature) => (
+              <li key={feature} className="flex items-center gap-2">
+                <Check className="size-4 text-blue-500" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <Button disabled className="cursor-default">
+            Free
+          </Button>
+        </div>
+
+        {/* Divider */}
+        <div className="mx-6 border-l" />
+
+        {/* Premium */}
+        <div className="flex w-1/2 flex-col space-y-5">
+          <h3 className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-center text-lg font-bold text-transparent">
+            Premium
+          </h3>
+          <ul className="list-inside space-y-2">
+            {premiumPlusFeatures.map((feature) => (
+              <li key={feature} className="flex items-center gap-2">
+                <Check className="size-4 text-blue-600" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+          <Button
+            variant="premium"
+            onClick={() => handlePremiumClick(process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_PLUS_MONTHLY!)}
+            disabled={loading}
+          >
+            {loading ? "Processing..." : "R250.00/month"}
+          </Button>
+        </div>
       </div>
     </div>
   </div>
-            <div className="mx-6 border-l" />
-            <div className="flex w-1/2 flex-col space-y-5">
-              <h3 className="bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-center text-lg font-bold text-transparent">
-                Premium 
-              </h3>
-              <ul className="list-inside space-y-2">
-                {premiumPlusFeatures.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2">
-                    <Check className="size-4 text-blue-600" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                variant="premium"
-                onClick={() => handlePremiumClick(process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_PLUS_MONTHLY!)}
-                disabled={loading}
-              >
-                {loading ? 'Processing...' : 'R250.00/month'}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </DialogContent>
+</DialogContent>
     </Dialog>
   );
 }
