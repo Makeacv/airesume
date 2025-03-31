@@ -1,3 +1,23 @@
+import { Button } from "@/components/ui/button";
+import usePremiumModal from "@/hooks/usePremiumModal";
+import { canUseCustomizations } from "@/lib/permissions";
+import { Circle, Square, Squircle } from "lucide-react";
+import { useSubscriptionLevel } from "../SubscriptionLevelProvider";
+
+export const BorderStyles = {
+  SQUARE: "square",
+  CIRCLE: "circle",
+  SQUIRCLE: "squircle",
+};
+
+const borderStyles = Object.values(BorderStyles);
+
+interface BorderStyleButtonProps {
+  borderStyle: string | undefined;
+  onChange: (borderStyle: string) => void;
+}
+
+
 export default function BorderStyleButton({
   borderStyle,
   onChange,
