@@ -10,7 +10,7 @@ import ResumeItem from "./ResumeItem";
 import ResumeItemSkeleton from "@/components/ResumeItemSkeleton";
 
 export const metadata: Metadata = {
-  title: "Your resumes",
+  title: "Your CVs",
 };
 
 export default async function Page() {
