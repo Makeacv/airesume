@@ -90,8 +90,7 @@ export default async function Page() {
       </div>
 
       {/* Plan Comparison Cards */}
-      <div className="grid gap-6 sm:grid-cols-2">
-        <div className="rounded-lg border bg-card p-6">
+     <div className="rounded-lg border bg-card p-6">
           <h3 className="text-xl font-medium mb-4">Basic</h3>
           <ul className="space-y-3">
             <li className="flex items-center">
@@ -112,13 +111,13 @@ export default async function Page() {
             </li>
           </ul>
           <p className="mt-4 text-2xl font-bold">
-            $9.99
+            $0
             <span className="text-sm font-normal text-muted-foreground">/month</span>
           </p>
-           <Button disabled className="cursor-default">
+          <Button disabled className="cursor-default mt-2">
             Free
           </Button>
-            </div>
+        </div>
           )}
         </div>
 
