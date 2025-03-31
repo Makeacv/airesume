@@ -7,6 +7,7 @@ import Stripe from "stripe";
 import GetSubscriptionButton from "./GetSubscriptionButton";
 import ManageSubscriptionButton from "./ManageSubscriptionButton";
 import SubscribeButton from "./SubscribeButton";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Billing",
@@ -90,7 +91,8 @@ export default async function Page() {
       </div>
 
       {/* Plan Comparison Cards */}
-     <div className="rounded-lg border bg-card p-6">
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div className="rounded-lg border bg-card p-6">
           <h3 className="text-xl font-medium mb-4">Basic</h3>
           <ul className="space-y-3">
             <li className="flex items-center">
@@ -118,8 +120,6 @@ export default async function Page() {
             Free
           </Button>
         </div>
-          )}
-        </div>
 
         <div className="rounded-lg border bg-card p-6 relative">
           <div className="absolute -top-3 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm">
@@ -145,7 +145,7 @@ export default async function Page() {
               <span className="mr-2">✓</span>
               <span>PDF download</span>
             </li>
-             <li className="flex items-center">
+            <li className="flex items-center">
               <span className="mr-2">✓</span>
               <span>ATS-friendly</span>
             </li>
@@ -155,7 +155,7 @@ export default async function Page() {
             </li>
           </ul>
           <p className="mt-4 text-2xl font-bold">
-            $19.99
+            R250.00
             <span className="text-sm font-normal text-muted-foreground">/month</span>
           </p>
           {!subscription && (
