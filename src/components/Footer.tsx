@@ -87,22 +87,22 @@ export default function Footer() {
             Follow Us
           </h4>
           <div className="flex justify-center gap-4 text-xl">
-            <a href="#" className="hover:text-orange-500 transition">
+            <a target="_blank" href="https://www.facebook.com/profile.php?id=61574614392510" className="hover:text-orange-500 transition">
               <Facebook />
             </a>
-            <a href="#" className="hover:text-orange-500 transition">
+            <a target="_blank" href="https://www.instagram.com/makeacv.ai/" className="hover:text-orange-500 transition">
               <Instagram />
             </a>
-            <a href="#" className="hover:text-orange-500 transition">
+            <a target="_blank" href="https://x.com/Makecvai" className="hover:text-orange-500 transition">
               <BsTwitterX />
             </a>
-            <a href="#" className="hover:text-orange-500 transition">
+            <a target="_blank" href="https://www.linkedin.com/company/makeacv-ai" className="hover:text-orange-500 transition">
               <Linkedin />
             </a>
-            <a href="#" className="hover:text-orange-500 transition">
+            <a target="_blank" href="https://www.youtube.com/@makeacvai" className="hover:text-orange-500 transition">
               <Youtube />
             </a>
-            <a href="#" className="hover:text-orange-500 transition">
+            <a target="_blank" href="https://www.tiktok.com/@makeacv.ai?is_from_webapp=1&sender_device=pc" className="hover:text-orange-500 transition">
               <FaTiktok />
             </a>
           </div>
