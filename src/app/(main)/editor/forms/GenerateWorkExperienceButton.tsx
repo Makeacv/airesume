@@ -28,7 +28,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { WandSparklesIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSubscriptionLevel } from "../../SubscriptionLevelProvider";
+//import { useSubscriptionLevel } from "../../SubscriptionLevelProvider";
 import { generateWorkExperience } from "./actions";
 
 interface GenerateWorkExperienceButtonProps {
