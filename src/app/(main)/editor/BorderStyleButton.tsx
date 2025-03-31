@@ -26,7 +26,7 @@ export default function BorderStyleButton({
 
   function handleClick() {
     // Call the updated function which still accepts the argument
-    if (!canUseCustomizations(subscriptionLevel)) {
+    if (!canUseCustomizations()) {
       premiumModal.setOpen(true);
       return;
     }
