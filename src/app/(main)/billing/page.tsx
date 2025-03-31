@@ -96,11 +96,11 @@ export default async function Page() {
           <ul className="space-y-3">
             <li className="flex items-center">
               <span className="mr-2">✓</span>
-              <span>Create & download resumes</span>
+              <span>Use of our AI CV tool</span>
             </li>
             <li className="flex items-center">
               <span className="mr-2">✓</span>
-              <span>Limited to 2 resumes</span>
+              <span>Limited to 1 CV</span>
             </li>
             <li className="flex items-center">
               <span className="mr-2">✓</span>
@@ -115,11 +115,9 @@ export default async function Page() {
             $9.99
             <span className="text-sm font-normal text-muted-foreground">/month</span>
           </p>
-          {!subscription && (
-            <div className="mt-6">
-              <SubscribeButton 
-                priceId={process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_MONTHLY!}
-              />
+           <Button disabled className="cursor-default">
+            Free
+          </Button>
             </div>
           )}
         </div>
@@ -134,11 +132,11 @@ export default async function Page() {
           <ul className="space-y-3">
             <li className="flex items-center">
               <span className="mr-2">✓</span>
-              <span>Everything in Basic</span>
+              <span>Use of our AI CV tool</span>
             </li>
             <li className="flex items-center">
               <span className="mr-2">✓</span>
-              <span>Infinite resumes</span>
+              <span>Up to 200 CVs</span>
             </li>
             <li className="flex items-center">
               <span className="mr-2">✓</span>
@@ -146,11 +144,15 @@ export default async function Page() {
             </li>
             <li className="flex items-center">
               <span className="mr-2">✓</span>
-              <span>AI-Powered Resume Builder</span>
+              <span>PDF download</span>
+            </li>
+             <li className="flex items-center">
+              <span className="mr-2">✓</span>
+              <span>ATS-friendly</span>
             </li>
             <li className="flex items-center">
               <span className="mr-2">✓</span>
-              <span>Priority support</span>
+              <span>Support</span>
             </li>
           </ul>
           <p className="mt-4 text-2xl font-bold">
