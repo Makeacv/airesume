@@ -125,7 +125,7 @@ export default async function Page() {
           <div className="absolute -top-3 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm">
             Popular
           </div>
-          <h3 className="text-xl font-medium mb-4 bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
+          <h3 className="text-xl font-medium mb-4 bg-gradient-to-r from-orange-600 to-orange-600 bg-clip-text text-transparent">
             Premium
           </h3>
           <ul className="space-y-3">
