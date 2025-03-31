@@ -1,31 +1,13 @@
-import { Button } from "@/components/ui/button";
-import usePremiumModal from "@/hooks/usePremiumModal";
-import { canUseCustomizations } from "@/lib/permissions";
-import { Circle, Square, Squircle } from "lucide-react";
-import { useSubscriptionLevel } from "../SubscriptionLevelProvider";
-
-export const BorderStyles = {
-  SQUARE: "square",
-  CIRCLE: "circle",
-  SQUIRCLE: "squircle",
-};
-
-const borderStyles = Object.values(BorderStyles);
-
-interface BorderStyleButtonProps {
-  borderStyle: string | undefined;
-  onChange: (borderStyle: string) => void;
-}
-
 export default function BorderStyleButton({
   borderStyle,
   onChange,
 }: BorderStyleButtonProps) {
-  const subscriptionLevel = useSubscriptionLevel();
+  // ❌ REMOVE this line, it's unused now
+  // const subscriptionLevel = useSubscriptionLevel();
+
   const premiumModal = usePremiumModal();
 
   function handleClick() {
-    // Call the updated function which still accepts the argument
     if (!canUseCustomizations()) {
       premiumModal.setOpen(true);
       return;
