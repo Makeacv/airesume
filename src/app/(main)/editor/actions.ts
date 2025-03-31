@@ -48,7 +48,7 @@ export async function saveResume(values: ResumeValues) {
     (resumeValues.colorHex &&
       resumeValues.colorHex !== existingResume?.colorHex);
 
-  if (hasCustomizations && !canUseCustomizations(subscriptionLevel)) {
+  if (hasCustomizations && !canUseCustomizations()) {
     throw new Error("Customizations not allowed for this subscription level");
   }
 
