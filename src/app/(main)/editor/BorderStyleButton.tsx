@@ -22,10 +22,10 @@ export default function BorderStyleButton({
   onChange,
 }: BorderStyleButtonProps) {
   const subscriptionLevel = useSubscriptionLevel();
-
   const premiumModal = usePremiumModal();
 
   function handleClick() {
+    // Call the updated function which still accepts the argument
     if (!canUseCustomizations(subscriptionLevel)) {
       premiumModal.setOpen(true);
       return;
@@ -40,8 +40,8 @@ export default function BorderStyleButton({
     borderStyle === "square"
       ? Square
       : borderStyle === "circle"
-        ? Circle
-        : Squircle;
+      ? Circle
+      : Squircle;
 
   return (
     <Button
