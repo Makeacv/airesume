@@ -1,5 +1,4 @@
 
-
 export function canCreateResume(
   subscriptionLevel: SubscriptionLevel,
   currentResumeCount: number,
@@ -15,12 +14,12 @@ export function canCreateResume(
   return currentResumeCount < maxResumes;
 }
 
-export function canUseAITools(subscriptionLevel: SubscriptionLevel) {
+export function canUseAITools(_subscriptionLevel: SubscriptionLevel) {
   // ✅ Allow AI tools for all subscription levels
   return true;
 }
 
-export function canUseCustomizations(subscriptionLevel: SubscriptionLevel) {
+export function canUseCustomizations(_subscriptionLevel: SubscriptionLevel) {
   // ✅ Allow customizations for all subscription levels
   return true;
 }
