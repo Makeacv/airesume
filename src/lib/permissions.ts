@@ -16,9 +16,11 @@ export function canCreateResume(
 }
 
 export function canUseAITools(subscriptionLevel: SubscriptionLevel) {
-  return subscriptionLevel !== "free";
+  // ✅ Allow AI tools for all subscription levels
+  return true;
 }
 
 export function canUseCustomizations(subscriptionLevel: SubscriptionLevel) {
-  return subscriptionLevel === "pro_plus";
+  // ✅ Allow customizations for all subscription levels
+  return true;
 }
