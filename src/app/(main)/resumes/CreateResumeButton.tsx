@@ -31,7 +31,7 @@ export default function CreateResumeButton({
       className="mx-auto flex w-fit gap-2"
     >
       <PlusSquare className="size-5" />
-      New resume
+      New CV
     </Button>
   );
 }
