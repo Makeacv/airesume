@@ -98,9 +98,9 @@ export async function generateWorkExperience(
     throw new Error("Unauthorized");
   }
 
-  const subscriptionLevel = await getUserSubscriptionLevel(userId);
+  //const subscriptionLevel = await getUserSubscriptionLevel(userId);
 
-  if (!canUseAITools(subscriptionLevel)) {
+  if (!canUseAITools()) {
     throw new Error("Upgrade your subscription to use this feature");
   }
 
