@@ -2,7 +2,7 @@
 
 import openai from "@/lib/openai";
 import { canUseAITools } from "@/lib/permissions";
-//import { getUserSubscriptionLevel } from "@/lib/subscription";
+import { getUserSubscriptionLevel } from "@/lib/subscription";
 import {
   GenerateSummaryInput,
   generateSummarySchema,
@@ -19,7 +19,7 @@ export async function generateSummary(input: GenerateSummaryInput) {
     throw new Error("Unauthorized");
   }
 
-  //const subscriptionLevel = await getUserSubscriptionLevel(userId);
+  const subscriptionLevel = await getUserSubscriptionLevel(userId);
 
   if (!canUseAITools()) {
     throw new Error("Upgrade your subscription to use this feature");
