@@ -63,42 +63,42 @@ const reviews = [
     role: "Software Developer",
     content: "CV Pro's AI features helped me highlight my technical skills perfectly. The smart suggestions for keywords got my CV past ATS systems, and I landed interviews at three top tech companies!",
     rating: 5,
-    date: "Feb 15, 2024"
+    date: "Feb 15, 2025"
   },
   {
     name: "Rachel S.",
     role: "Marketing Manager",
     content: "The premium templates are worth every penny. I was able to create a stunning CV that stood out from the crowd. The AI writing assistant helped me quantify my achievements brilliantly.",
     rating: 5,
-    date: "Mar 1, 2024"
+    date: "Mar 1, 2025"
   },
   {
     name: "Michael P.",
     role: "Recent Graduate",
     content: "As a fresh graduate, I was struggling to create my first professional CV. CV Pro's AI suggestions helped me transform my academic projects into compelling professional experiences.",
     rating: 5,
-    date: "Jan 28, 2024"
+    date: "Jan 28, 2025"
   },
   {
     name: "Emma T.",
     role: "Career Switcher",
     content: "Switching from teaching to UX design seemed daunting, but CV Pro helped me translate my transferable skills perfectly. The AI tool knew exactly how to phrase my experience for tech companies.",
     rating: 5,
-    date: "Feb 20, 2024"
+    date: "Feb 20, 2025"
   },
   {
     name: "James W.",
     role: "Sales Executive",
     content: "The custom color schemes and formatting options helped my CV stand out while staying professional. Already recommended CV Pro to my entire sales team!",
     rating: 5,
-    date: "Mar 5, 2024"
+    date: "Mar 5, 2025"
   },
   {
     name: "Nina K.",
     role: "Project Manager",
     content: "The ability to create multiple versions of my CV for different roles is fantastic. The AI suggestions for each job application are spot-on. Worth every penny of the premium subscription!",
     rating: 5,
-    date: "Feb 8, 2024"
+    date: "Feb 8, 2025"
   },
 ];
 
@@ -372,19 +372,22 @@ export default function Home() {
 
           <div className="grid gap-8 md:grid-cols-2 max-w-4xl mx-auto">
             {/* Basic Plan */}
-            <div className="rounded-lg border bg-white dark:bg-black/40 p-8 shadow-sm dark:border-gray-800 backdrop-blur-sm">
-              <h3 className="text-xl font-semibold mb-2 dark:text-white">Basic</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">For serious job seekers</p>
+            <div className="rounded-lg border-2 border-[#FB6520] bg-white dark:bg-black/40 p-8 shadow-md relative backdrop-blur-sm">
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FB6520] text-white px-4 py-1 rounded-full text-sm">
+                Most Popular
+              </div>
+              <h3 className="text-xl font-semibold mb-2 dark:text-white">Free</h3>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">For job seekers</p>
               <div className="mb-6">
-                <span className="text-4xl font-bold dark:text-white">$9.99</span>
+                <span className="text-4xl font-bold dark:text-white">R0.00</span>
                 <span className="text-gray-600 dark:text-gray-400">/month</span>
               </div>
               <ul className="space-y-4 mb-16">
                 {[
-                  "Create & download cvs",
-                  "Limited to 2 cvs",
-                  "ATS-friendly",
+                  "Use of our AI CV tool",
+                  "Limited to 1 CV",
                   "PDF download",
+                  "ATS-friendly",
                 ].map((feature, i) => (
                   <li key={i} className="flex items-center gap-2 dark:text-gray-300">
                     <Check className="h-5 w-5 text-[#FB6520]" />
@@ -400,23 +403,21 @@ export default function Home() {
             </div>
 
             {/* Premium Plan */}
-            <div className="rounded-lg border-2 border-[#FB6520] bg-white dark:bg-black/40 p-8 shadow-md relative backdrop-blur-sm">
-              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FB6520] text-white px-4 py-1 rounded-full text-sm">
-                Most Popular
-              </div>
+            <div className="rounded-lg border-2  bg-white dark:bg-black/40 p-8 shadow-md relative backdrop-blur-sm">
               <h3 className="text-xl font-semibold mb-2 dark:text-white">Premium</h3>
-              <p className="text-gray-600 dark:text-gray-400 mb-6">For professionals</p>
+              <p className="text-gray-600 dark:text-gray-400 mb-6">For Agencies</p>
               <div className="mb-6">
-                <span className="text-4xl font-bold dark:text-white">$19.99</span>
+                <span className="text-4xl font-bold dark:text-white">R250.00</span>
                 <span className="text-gray-600 dark:text-gray-400">/month</span>
               </div>
               <ul className="space-y-4 mb-6">
                 {[
-                  "Everything in Basic",
-                  "Infinite CVs",
-                  "Design customizations",
-                  "AI-Powered CV Builder",
-                  "Priority support",
+                  "Use of our AI CV tool",
+                  "Up to 200 CVs",
+                  "Design Customisation",
+                  "PDF download",
+                  "ATS-friendly",
+                  "Support",
                 ].map((feature, i) => (
                   <li key={i} className="flex items-center gap-2 dark:text-gray-300">
                     <Check className="h-5 w-5 text-[#FB6520]" />
@@ -474,7 +475,7 @@ export default function Home() {
       <section className="bg-[#FB6520] py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="mb-6 text-4xl font-bold text-white">
-            Ready to Land Your Dream Job?
+            Join thousands of job seekers who trust our platform
           </h2>
           <p className="mb-8 text-lg text-white/90 max-w-2xl mx-auto">
             Join 150,000+ professionals who trust our platform

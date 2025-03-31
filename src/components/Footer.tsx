@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Instagram, Linkedin, Mail, Phone } from "lucide-react";
+import { Facebook, Instagram, Linkedin, Mail, Phone, Youtube } from "lucide-react";
+import { FaTiktok } from "react-icons/fa";
+import { BsTwitterX } from "react-icons/bs";
+
 
 export default function Footer() {
   return (
@@ -26,7 +29,7 @@ export default function Footer() {
             />
           </Link>
           <p className="text-sm sm:text-base">
-            Helping South Africans build standout resumes in minutes - simple, fast &amp; free.
+            Helping South Africans build standout CVs in minutes - simple, fast &amp; free.
           </p>
         </div>
 
@@ -91,7 +94,16 @@ export default function Footer() {
               <Instagram />
             </a>
             <a href="#" className="hover:text-orange-500 transition">
+              <BsTwitterX />
+            </a>
+            <a href="#" className="hover:text-orange-500 transition">
               <Linkedin />
+            </a>
+            <a href="#" className="hover:text-orange-500 transition">
+              <Youtube />
+            </a>
+            <a href="#" className="hover:text-orange-500 transition">
+              <FaTiktok />
             </a>
           </div>
         </div>
