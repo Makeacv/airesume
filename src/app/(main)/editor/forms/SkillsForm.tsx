@@ -66,7 +66,7 @@ export default function SkillsForm({
                   />
                 </FormControl>
                 <FormDescription>
-                  Separate each skill with a comma.
+                  Separate each strength with a comma.
                 </FormDescription>
                 <FormMessage />
               </FormItem>
