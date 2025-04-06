@@ -2,77 +2,106 @@
 import ThemeToggle from "@/components/ThemeToggle";
 import { UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
-import { CreditCard } from "lucide-react";
+import { CreditCard, Menu } from "lucide-react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+
+function useMediaQuery(query: string) {
+  const [matches, setMatches] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const mediaQuery = window.matchMedia(query);
+      setMatches(mediaQuery.matches);
+
+      const handleChange = (event: MediaQueryListEvent) => {
+        setMatches(event.matches);
+      };
+
+      if (mediaQuery.addEventListener) {
+        mediaQuery.addEventListener("change", handleChange);
+        return () => mediaQuery.removeEventListener("change", handleChange);
+      } else if (mediaQuery.addListener) {
+        mediaQuery.addListener(handleChange);
+        return () => mediaQuery.removeListener(handleChange);
+      }
+    }
+  }, [query]);
+
+  return matches;
+}
 
 export default function Navbar() {
   const { theme } = useTheme();
+  const isMobile = useMediaQuery("(max-width: 768px)");
 
   return (
     <header className="shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 p-3">
-        {/* Left side: Logo + nav links */}
         <div className="flex items-center gap-6">
-        <Link href="/" className="flex items-center gap-2">
-  {/* Light mode logo */}
-  <Image
-    src="/logo.png"
-    alt="Logo"
-    width={120}
-    height={40}
-    className="h-10 w-auto block dark:hidden"
-  />
+          <Link href="/" className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={120}
+              height={40}
+              className="block h-10 w-auto dark:hidden"
+            />
 
-  {/* Dark mode logo */}
-  <Image
-    src="/logodark.png"
-    alt="Logo dark"
-    width={120}
-    height={40}
-    className="h-10 w-auto hidden dark:block"
-  />
-</Link>
-
-
-          {/* ✅ Home link here */}
-          <Link
-            href="/resumes"
-            className="text-sm font-medium hover:text-orange-600 transition-colors"
-          >
-           Home
+            <Image
+              src="/logodark.png"
+              alt="Logo dark"
+              width={120}
+              height={40}
+              className="hidden h-10 w-auto dark:block"
+            />
           </Link>
 
-          {/* ✅ Blog link here */}
-          <Link
-            href="/blog"
-            className="text-sm font-medium hover:text-orange-600 transition-colors"
-          >
-            Blog
-          </Link>
+          {!isMobile && (
+            <>
+              <Link
+                href="/resumes"
+                className="text-sm font-medium transition-colors hover:text-orange-600"
+              >
+                Home
+              </Link>
 
-            {/* ✅ contact link here */}
-            <Link
-            href="/contact"
-            className="text-sm font-medium hover:text-orange-600 transition-colors"
-          >
-            Contact us 
-          </Link>
+              <Link
+                href="/blog"
+                className="text-sm font-medium transition-colors hover:text-orange-600"
+              >
+                Blog
+              </Link>
 
-           {/* ✅ contact link here */}
-           <Link
-            href="/about"
-            className="text-sm font-medium hover:text-orange-600 transition-colors"
-          >
-            About
-          </Link>
+              <Link
+                href="/contact"
+                className="text-sm font-medium transition-colors hover:text-orange-600"
+              >
+                Contact us
+              </Link>
+
+              <Link
+                href="/about"
+                className="text-sm font-medium transition-colors hover:text-orange-600"
+              >
+                About
+              </Link>
+            </>
+          )}
         </div>
-        
 
-        {/* Right side: Theme toggle + User */}
         <div className="flex items-center gap-3">
-          <ThemeToggle />
+          {!isMobile && <ThemeToggle />}
+
           <UserButton
             appearance={{
               baseTheme: theme === "dark" ? dark : undefined,
@@ -92,6 +121,56 @@ export default function Navbar() {
               />
             </UserButton.MenuItems>
           </UserButton>
+
+          {isMobile && (
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent className="border-t bg-white dark:border-gray-800 dark:bg-black">
+                <div className="flex flex-col gap-6 pt-10">
+                  <ThemeToggle />
+                  <SheetClose asChild>
+                    <Link
+                      href="/resumes"
+                      className="text-base font-medium transition-colors hover:text-orange-600"
+                    >
+                      Home
+                    </Link>
+                  </SheetClose>
+
+                  <SheetClose asChild>
+                    <Link
+                      href="/blog"
+                      className="text-base font-medium transition-colors hover:text-orange-600"
+                    >
+                      Blog
+                    </Link>
+                  </SheetClose>
+
+                  <SheetClose asChild>
+                    <Link
+                      href="/contact"
+                      className="text-base font-medium transition-colors hover:text-orange-600"
+                    >
+                      Contact us
+                    </Link>
+                  </SheetClose>
+
+                  <SheetClose asChild>
+                    <Link
+                      href="/about"
+                      className="text-base font-medium transition-colors hover:text-orange-600"
+                    >
+                      About
+                    </Link>
+                  </SheetClose>
+                </div>
+              </SheetContent>
+            </Sheet>
+          )}
         </div>
       </div>
     </header>

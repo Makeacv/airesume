@@ -1,4 +1,3 @@
-import resumePreview from "@/assets/resume-preview.jpg";
 import { Button } from "@/components/ui/button";
 import { Check, Star } from "lucide-react";
 import Image from "next/image";
@@ -166,12 +165,13 @@ export default function Home() {
 
           {/* Preview Image */}
           <div className="relative flex-1 mt-6 md:mt-0 md:max-w-[450px]">
-            <div className="absolute -inset-1 bg-gradient-to-r from-[#FB6520] to-[#FB6530] opacity-30 blur"></div>
+            {/* <div className="absolute -inset-1 bg-gradient-to-r from-[#FB6520] to-[#FB6530] opacity-30 blur"></div> */}
             <Image
-              src={resumePreview}
-              alt="CV preview"
+              src="/homepage_banner.jpg"
+              alt="Hero Banner"
+              height={1000}
               width={450}
-              className="relative rounded-lg shadow-xl transition-all hover:scale-105"
+              className=""
             />
           </div>
         </div>
@@ -287,8 +287,8 @@ export default function Home() {
             {/* Left Column: Image */}
             <div className="flex justify-center">
               <Image
-                src="/recruitment_companies.png" // Replace with your actual image path
-                alt="Laptop showing a CV example"
+                src="/cv.jpg" // Replace with your actual image path
+                alt="CV"
                 width={550}
                 height={400}
                 quality={100}

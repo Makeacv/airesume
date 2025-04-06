@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s - AI Resume Builder",
+    template: "%s - AI CV Builder",
     absolute: "Free CV Builder South Africa | Fast & Easy AI Tool | Make A CV",
   },
   description:

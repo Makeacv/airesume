@@ -28,7 +28,7 @@ export default function ColorPicker({ color, onChange }: ColorPickerProps) {
         <Button
           variant="outline"
           size="icon"
-          title="Change resume color"
+          title="Change CV color"
           onClick={() => {
             if (!canUseCustomizations()) {
               premiumModal.setOpen(true);

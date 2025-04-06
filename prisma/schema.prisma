@@ -34,6 +34,7 @@ model Resume {
   email       String?
   nationality String?
   idNumber    String?
+  driverLicense Boolean?
 
   workExperiences WorkExperience[]
   educations      Education[]

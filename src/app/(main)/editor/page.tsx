@@ -9,7 +9,7 @@ interface PageProps {
 }
 
 export const metadata: Metadata = {
-  title: "Design your resume",
+  title: "Design your CV",
 };
 
 export default async function Page({ searchParams }: PageProps) {

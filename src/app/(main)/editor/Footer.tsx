@@ -53,7 +53,7 @@ export default function Footer({
           onClick={() => setShowSmResumePreview(!showSmResumePreview)}
           className="md:hidden"
           title={
-            showSmResumePreview ? "Show input form" : "Show resume preview"
+            showSmResumePreview ? "Show input form" : "Show CV preview"
           }
         >
           {showSmResumePreview ? <PenLineIcon /> : <FileUserIcon />}

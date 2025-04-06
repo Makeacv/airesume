@@ -39,7 +39,7 @@ export default function SummaryForm({
       <div className="space-y-1.5 text-center">
         <h2 className="text-2xl font-semibold">Professional summary</h2>
         <p className="text-sm text-muted-foreground">
-          Write a short introduction for your resume or let the AI generate one
+          Write a short introduction for your CV or let the AI generate one
           from your entered data.
         </p>
       </div>
@@ -55,6 +55,7 @@ export default function SummaryForm({
                   <Textarea
                     {...field}
                     placeholder="A brief, engaging text about yourself"
+                    className="h-48"
                   />
                 </FormControl>
                 <FormMessage />
