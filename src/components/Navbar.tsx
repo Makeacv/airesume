@@ -108,7 +108,7 @@ export default function Navbar() {
                 href={isSignedIn ? "/resumes" : "/"}
                 className="transition hover:text-orange-500"
               >
-                Home
+                {isSignedIn?"My CV": 'Home'}
               </Link>
               <Link href="/blog" className="transition hover:text-orange-500">
                 Blog
@@ -159,7 +159,8 @@ export default function Navbar() {
                         href={isSignedIn ? "/resumes" : "/"}
                         className="block transition hover:text-orange-500"
                       >
-                        Home
+                        {isSignedIn ? "My CV" : 'Home'}
+
                       </Link>
                     </SheetClose>
                     <SheetClose asChild>

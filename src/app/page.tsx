@@ -105,7 +105,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-gray-100 to-white dark:from-black dark:via-gray-900 dark:to-black px-4 pt-24 pb-12">
+      <section className="relative bg-gradient-to-b from-gray-100 to-white dark:from-black dark:via-gray-900 dark:to-black px-4 pt-24 sm:pt-40 pb-12">
         <div className="container mx-auto flex flex-col items-center gap-6 md:flex-row 2xl:px-40 xl:px-24 lg:px-16">
           <div className="flex-1 space-y-4 text-center md:text-left max-md:my-10">
             <div className="space-y-2 max-md:space-y-0">
@@ -167,7 +167,7 @@ export default function Home() {
           <div className="relative flex-1 mt-6 md:mt-0 md:max-w-[450px]">
             {/* <div className="absolute -inset-1 bg-gradient-to-r from-[#FB6520] to-[#FB6530] opacity-30 blur"></div> */}
             <Image
-              src="/homepage_banner.jpg"
+              src="/homepage_banner.png"
               alt="Hero Banner"
               height={1000}
               width={450}

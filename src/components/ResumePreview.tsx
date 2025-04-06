@@ -284,10 +284,10 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
             color: colorHex,
           }}
         >
-          Skills
+          Strengths
         </p>
         <div className="flex break-inside-avoid flex-wrap gap-2">
-          {skills.map((skill, index) => (
+          {skills?.map((skill, index) => (
             <Badge
               key={index}
               className="rounded-md bg-black text-white hover:bg-black"

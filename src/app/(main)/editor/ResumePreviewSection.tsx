@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ResumePreview from "@/components/ResumePreview";
 import { cn } from "@/lib/utils";
 import { ResumeValues } from "@/lib/validation";
@@ -8,12 +9,14 @@ interface ResumePreviewSectionProps {
   resumeData: ResumeValues;
   setResumeData: (data: ResumeValues) => void;
   className?: string;
+  contentRef:any
 }
 
 export default function ResumePreviewSection({
   resumeData,
   setResumeData,
   className,
+  contentRef
 }: ResumePreviewSectionProps) {
   return (
     <div
@@ -36,6 +39,7 @@ export default function ResumePreviewSection({
       <div className="flex w-full justify-center overflow-y-auto bg-secondary p-3">
         <ResumePreview
           resumeData={resumeData}
+          contentRef={contentRef}
           className="max-w-2xl shadow-md"
         />
       </div>

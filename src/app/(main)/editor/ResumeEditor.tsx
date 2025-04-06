@@ -5,7 +5,7 @@ import { ResumeServerData } from "@/lib/types";
 import { cn, mapToResumeValues } from "@/lib/utils";
 import { ResumeValues } from "@/lib/validation";
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
 import ResumePreviewSection from "./ResumePreviewSection";
@@ -24,6 +24,7 @@ export default function ResumeEditor({ resumeToEdit }: ResumeEditorProps) {
   );
 
   const [showSmResumePreview, setShowSmResumePreview] = useState(false);
+ const contentRef = useRef<HTMLDivElement>(null);
 
   const { isSaving, hasUnsavedChanges } = useAutoSaveResume(resumeData);
 
@@ -70,6 +71,7 @@ export default function ResumeEditor({ resumeToEdit }: ResumeEditorProps) {
           <ResumePreviewSection
             resumeData={resumeData}
             setResumeData={setResumeData}
+            contentRef={contentRef}
             className={cn(showSmResumePreview && "flex")}
           />
         </div>
@@ -77,6 +79,8 @@ export default function ResumeEditor({ resumeToEdit }: ResumeEditorProps) {
       <Footer
         currentStep={currentStep}
         setCurrentStep={setStep}
+        resumeData={resumeData}
+        contentRef={contentRef}
         showSmResumePreview={showSmResumePreview}
         setShowSmResumePreview={setShowSmResumePreview}
         isSaving={isSaving}

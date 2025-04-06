@@ -72,7 +72,7 @@ export default function Navbar() {
                 href="/resumes"
                 className="text-sm font-medium transition-colors hover:text-orange-600"
               >
-                Home
+                My CV
               </Link>
 
               <Link
@@ -137,7 +137,7 @@ export default function Navbar() {
                       href="/resumes"
                       className="text-base font-medium transition-colors hover:text-orange-600"
                     >
-                      Home
+                      My CV
                     </Link>
                   </SheetClose>
 
