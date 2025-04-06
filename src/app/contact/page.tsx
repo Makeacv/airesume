@@ -10,7 +10,7 @@ import Image from "next/image";
 export default function ContactPage() {
   const searchParams = useSearchParams();
   const submitted = searchParams.get("success") === "true";
-
+// for commit 
   return (
     <>
       <main className="mx-auto max-w-7xl px-4 py-24">
