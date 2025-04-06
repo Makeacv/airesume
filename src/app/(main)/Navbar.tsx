@@ -47,7 +47,7 @@ export default function Navbar() {
   return (
     <header className="shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 p-3">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6 w-full">
           <Link href="/" className="flex items-center gap-2">
             <Image
               src="/logo.png"
@@ -67,7 +67,7 @@ export default function Navbar() {
           </Link>
 
           {!isMobile && (
-            <>
+            <div className="w-full flex justify-end gap-3">
               <Link
                 href="/resumes"
                 className="text-sm font-medium transition-colors hover:text-orange-600"
@@ -95,7 +95,7 @@ export default function Navbar() {
               >
                 About
               </Link>
-            </>
+            </div>
           )}
         </div>
 
