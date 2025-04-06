@@ -3,7 +3,7 @@ import { Metadata } from "next";
 // 1. Export metadata here
 export const metadata: Metadata = {
     title: {
-        template: "%s - AI Resume Builder",
+        template: "%s - AI CV Builder",
         absolute: "Blog | Insights & Tips – Make A CV",
     },
     description:

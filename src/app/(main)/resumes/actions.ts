@@ -20,7 +20,7 @@ export async function deleteResume(id: string) {
   });
 
   if (!resume) {
-    throw new Error("Resume not found");
+    throw new Error("CV not found");
   }
 
   if (resume.photoUrl) {

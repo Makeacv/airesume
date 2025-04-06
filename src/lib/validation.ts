@@ -30,6 +30,7 @@ export const personalInfoSchema = z.object({
   email: optionalString,
   nationality: optionalString,
   idNumber: optionalString,
+  driverLicense: z.boolean().optional(),
 });
 
 export type PersonalInfoValues = z.infer<typeof personalInfoSchema>;

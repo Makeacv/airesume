@@ -39,7 +39,7 @@ export async function saveResume(values: ResumeValues) {
     : null;
 
   if (id && !existingResume) {
-    throw new Error("Resume not found");
+    throw new Error("CV not found");
   }
 
   const hasCustomizations =

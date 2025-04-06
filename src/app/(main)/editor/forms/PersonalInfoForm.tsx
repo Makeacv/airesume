@@ -2,12 +2,14 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import { EditorFormProps } from "@/lib/types";
 import { personalInfoSchema, PersonalInfoValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -30,6 +32,7 @@ export default function PersonalInfoForm({
       email: resumeData.email || "",
       nationality: resumeData.nationality || "",
       idNumber: resumeData.idNumber || "",
+      driverLicense: resumeData.driverLicense || false,
     },
   });
 
@@ -204,6 +207,27 @@ export default function PersonalInfoForm({
                 <FormLabel>Email</FormLabel>
                 <FormControl>
                   <Input {...field} type="email" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="driverLicense"
+            render={({ field }) => (
+              <FormItem className="!mt-5 flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
+                <div className="space-y-0.5">
+                  <FormLabel>Driver&apos;s License</FormLabel>
+                  <FormDescription className="text-sm text-muted-foreground">
+                    Do you have a valid driver&apos;s license?
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

@@ -66,6 +66,7 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
     idNumber,
     colorHex,
     borderStyle,
+    driverLicense,
   } = resumeData;
 
   const [photoSrc, setPhotoSrc] = useState(photo instanceof File ? "" : photo);
@@ -123,10 +124,12 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
           {[phone, email].filter(Boolean).join(" • ")}
         </p>
         <p className="text-xs text-gray-500">
-    {nationality && `Nationality: ${nationality}`}
-    {nationality && idNumber ? " • " : ""}
-    {idNumber && `ID: ${idNumber}`}
-  </p>
+          {nationality && `Nationality: ${nationality}`}
+          {nationality && idNumber ? " • " : ""}
+          {idNumber && `ID: ${idNumber}`}
+          {idNumber && driverLicense ? " • " : ""}
+          {driverLicense && `Drivers License: Yes`}
+        </p>
       </div>
     </div>
   );

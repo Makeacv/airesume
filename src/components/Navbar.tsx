@@ -5,8 +5,17 @@ import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
-import { Menu } from "lucide-react";
-import { Sheet, SheetTrigger, SheetContent, SheetClose } from "@/components/ui/sheet";
+import { Menu, CreditCard } from "lucide-react";
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetClose,
+} from "@/components/ui/sheet";
+import { UserButton } from "@clerk/nextjs";
+import { useTheme } from "next-themes";
+import { useAuth } from "@clerk/nextjs";
+import { dark } from "@clerk/themes";
 
 // Custom hook to detect media query matches with a fallback for older browsers
 function useMediaQuery(query: string) {
@@ -34,28 +43,59 @@ function useMediaQuery(query: string) {
   return matches;
 }
 
-export default function Navbar() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
+// User profile button component
+const UserProfileButton = () => {
+  const { theme } = useTheme();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-black/80 border-b dark:border-gray-800">
+    <UserButton
+      appearance={{
+        baseTheme: theme === "dark" ? dark : undefined,
+        elements: {
+          avatarBox: {
+            width: 35,
+            height: 35,
+          },
+        },
+      }}
+    >
+      <UserButton.MenuItems>
+        <UserButton.Link
+          label="Billing"
+          labelIcon={<CreditCard className="size-4" />}
+          href="/billing"
+        />
+      </UserButton.MenuItems>
+    </UserButton>
+  );
+};
+
+export default function Navbar() {
+  const isMobile = useMediaQuery("(max-width: 768px)");
+  const { isSignedIn } = useAuth();
+
+  return (
+    <nav className="fixed left-0 right-0 top-0 z-40 border-b bg-white/80 dark:border-gray-800 dark:bg-black/80">
       <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link
+            href={isSignedIn ? "/resumes" : "/"}
+            className="flex items-center gap-2"
+          >
             <Image
               src="/logo.png"
               alt="Logo"
               width={120}
               height={40}
-              className="h-10 w-auto block dark:hidden"
+              className="block h-10 w-auto dark:hidden"
             />
             <Image
               src="/logodark.png"
               alt="Logo dark"
               width={120}
               height={40}
-              className="h-10 w-auto hidden dark:block"
+              className="hidden h-10 w-auto dark:block"
             />
           </Link>
 
@@ -64,82 +104,111 @@ export default function Navbar() {
             <div className="flex items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-300">
               <ThemeToggle />
 
-              <Link href="/" className="hover:text-orange-500 transition">
+              <Link
+                href={isSignedIn ? "/resumes" : "/"}
+                className="transition hover:text-orange-500"
+              >
                 Home
               </Link>
-              <Link href="/blog" className="hover:text-orange-500 transition">
+              <Link href="/blog" className="transition hover:text-orange-500">
                 Blog
               </Link>
-              <Link href="/about" className="hover:text-orange-500 transition">
+              <Link href="/about" className="transition hover:text-orange-500">
                 About
               </Link>
-              <Link href="/contact" className="hover:text-orange-500 transition">
+              <Link
+                href="/contact"
+                className="transition hover:text-orange-500"
+              >
                 Contact
               </Link>
 
               <div className="ml-1 flex items-center gap-4">
-                <Link href="/resumes">
-                  <Button variant="ghost">Sign in</Button>
-                </Link>
-                <Link href="/resumes">
-                  <Button variant="premium">Get Started</Button>
-                </Link>
+                {isSignedIn ? (
+                  <UserProfileButton />
+                ) : (
+                  <>
+                    <Link href="/sign-in">
+                      <Button variant="ghost">Sign in</Button>
+                    </Link>
+                    <Link href="/sign-up">
+                      <Button variant="premium">Get Started</Button>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           )}
 
           {/* Mobile Navigation using Sheet from shadcn */}
           {isMobile && (
-            <Sheet>
-              <SheetTrigger asChild>
-                <Button variant="ghost" className="z-50">
-                  <Menu size={24} />
-                </Button>
-              </SheetTrigger>
-              <SheetContent className="bg-white dark:bg-black border-t dark:border-gray-800">
-                <div className="px-4 py-6 space-y-4">
-                  <ThemeToggle />
+            <div className="flex items-center gap-2">
+              {isSignedIn && <UserProfileButton />}
+              <Sheet>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" className="z-50">
+                    <Menu size={24} />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent className="border-t bg-white dark:border-gray-800 dark:bg-black">
+                  <div className="space-y-4 px-4 py-6">
+                    <ThemeToggle />
 
-                  <SheetClose asChild>
-                    <Link href="/" className="block hover:text-orange-500 transition">
-                      Home
-                    </Link>
-                  </SheetClose>
-                  <SheetClose asChild>
-                    <Link href="/blog" className="block hover:text-orange-500 transition">
-                      Blog
-                    </Link>
-                  </SheetClose>
-                  <SheetClose asChild>
-                    <Link href="/about" className="block hover:text-orange-500 transition">
-                      About
-                    </Link>
-                  </SheetClose>
-                  <SheetClose asChild>
-                    <Link href="/contact" className="block hover:text-orange-500 transition">
-                      Contact
-                    </Link>
-                  </SheetClose>
-
-                  <div className="flex flex-col gap-2">
                     <SheetClose asChild>
-                      <Link href="/resumes">
-                        <Button variant="outline" className="w-full">
-                          Sign in
-                        </Button>
+                      <Link
+                        href={isSignedIn ? "/resumes" : "/"}
+                        className="block transition hover:text-orange-500"
+                      >
+                        Home
                       </Link>
                     </SheetClose>
                     <SheetClose asChild>
-                      <Link href="/resumes">
-                        <Button variant="premium" className="w-full">
-                          Get Started
-                        </Button>
+                      <Link
+                        href="/blog"
+                        className="block transition hover:text-orange-500"
+                      >
+                        Blog
                       </Link>
                     </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/about"
+                        className="block transition hover:text-orange-500"
+                      >
+                        About
+                      </Link>
+                    </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/contact"
+                        className="block transition hover:text-orange-500"
+                      >
+                        Contact
+                      </Link>
+                    </SheetClose>
+
+                    {!isSignedIn && (
+                      <div className="mt-4 flex flex-col gap-2">
+                        <SheetClose asChild>
+                          <Link href="/sign-in">
+                            <Button variant="outline" className="w-full">
+                              Sign in
+                            </Button>
+                          </Link>
+                        </SheetClose>
+                        <SheetClose asChild>
+                          <Link href="/sign-up">
+                            <Button variant="premium" className="w-full">
+                              Get Started
+                            </Button>
+                          </Link>
+                        </SheetClose>
+                      </div>
+                    )}
                   </div>
-                </div>
-              </SheetContent>
-            </Sheet>
+                </SheetContent>
+              </Sheet>
+            </div>
           )}
         </div>
       </div>
