@@ -164,13 +164,13 @@ export default function Home() {
           </div>
 
           {/* Preview Image */}
-          <div className="relative flex-1 mt-6 md:mt-0 md:max-w-[450px]">
+          <div className="relative flex-1 mt-6 md:mt-0 md:max-w-[700px]">
             {/* <div className="absolute -inset-1 bg-gradient-to-r from-[#FB6520] to-[#FB6530] opacity-30 blur"></div> */}
             <Image
               src="/homepage_banner.png"
               alt="Hero Banner"
               height={1000}
-              width={450}
+              width={700}
               className=""
             />
           </div>
