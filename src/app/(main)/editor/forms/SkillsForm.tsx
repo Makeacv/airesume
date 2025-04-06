@@ -58,7 +58,7 @@ export default function SkillsForm({
                 <FormControl>
                   <Textarea
                     {...field}
-                    placeholder="e.g. Honest, Hardworking, Reliable, ..."
+                    placeholder="e.g. Honest, Hardworking, Reliable..."
                     onChange={(e) => {
                       const skills = e.target.value.split(",");
                       field.onChange(skills);
