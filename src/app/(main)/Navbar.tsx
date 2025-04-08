@@ -47,14 +47,14 @@ export default function Navbar() {
   return (
     <header className="shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 p-3">
-        <div className="flex items-center gap-6 w-full">
+        <div className="flex items-center w-full">
           <Link href="/" className="flex items-center gap-2">
             <Image
               src="/logo.png"
               alt="Logo"
               width={120}
               height={40}
-              className="block h-10 w-auto dark:hidden"
+              className="block h-10 w-auto myCVLogo dark:hidden"
             />
 
             <Image
@@ -62,12 +62,17 @@ export default function Navbar() {
               alt="Logo dark"
               width={120}
               height={40}
-              className="hidden h-10 w-auto dark:block"
+              className="hidden h-10 w-auto myCVLogo dark:block"
             />
           </Link>
 
           {!isMobile && (
             <div className="w-full flex justify-end gap-3">
+              <Link
+                href="/"
+                className="text-sm font-medium transition-colors hover:text-orange-600"
+              >
+Home              </Link>
               <Link
                 href="/resumes"
                 className="text-sm font-medium transition-colors hover:text-orange-600"
@@ -75,12 +80,12 @@ export default function Navbar() {
                 My CV
               </Link>
 
-              <Link
+              {/* <Link
                 href="/blog"
                 className="text-sm font-medium transition-colors hover:text-orange-600"
               >
                 Blog
-              </Link>
+              </Link> */}
 
               <Link
                 href="/contact"

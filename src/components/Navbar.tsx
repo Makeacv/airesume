@@ -80,7 +80,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
-            href={isSignedIn ? "/resumes" : "/"}
+            href={ "/"}
             className="flex items-center gap-2"
           >
             <Image
@@ -103,16 +103,21 @@ export default function Navbar() {
           {!isMobile && (
             <div className="flex items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-300">
               <ThemeToggle />
-
+              {isSignedIn &&<Link
+                href={ "/"}
+                className="transition hover:text-orange-500"
+              >
+                Home
+              </Link>}
               <Link
                 href={isSignedIn ? "/resumes" : "/"}
                 className="transition hover:text-orange-500"
               >
                 {isSignedIn?"My CV": 'Home'}
               </Link>
-              <Link href="/blog" className="transition hover:text-orange-500">
+              {/* <Link href="/blog" className="transition hover:text-orange-500">
                 Blog
-              </Link>
+              </Link> */}
               <Link href="/about" className="transition hover:text-orange-500">
                 About
               </Link>

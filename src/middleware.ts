@@ -7,7 +7,8 @@ const isPublicRoute = createRouteMatcher([
   "/api/stripe-webhook",
   "/about(.*)",
   "/contact(.*)",
-  "/blog(.*)",
+  // "/blog(.*)",
+  "/faqs(.*)",
   "/sitemap.xml(.*)",
   "/robots.txt(.*)",
   "/sitemap(.*)"

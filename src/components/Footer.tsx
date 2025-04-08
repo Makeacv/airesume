@@ -44,11 +44,11 @@ export default function Footer() {
                 About Us
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/blog" className="hover:text-orange-500 transition">
                 Blog
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link href="/contact" className="hover:text-orange-500 transition">
                 Contact

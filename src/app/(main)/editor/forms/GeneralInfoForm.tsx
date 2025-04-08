@@ -68,7 +68,7 @@ export default function GeneralInfoForm({
                   <Input {...field} placeholder="A CV for my next job" />
                 </FormControl>
                 <FormDescription>
-                  Describe what this resume is for.
+                  Describe what this CV is for.
                 </FormDescription>
                 <FormMessage />
               </FormItem>

@@ -3,7 +3,9 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 
-const pagesWithNavbar = ["/", "/blog", "/about", "/contact",  ];
+const pagesWithNavbar = ["/",
+//  "/blog",
+ "/about", "/contact",'/faqs'  ];
 
 export default function LayoutWithNavbar({
   children,
