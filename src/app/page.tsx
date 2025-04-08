@@ -468,6 +468,10 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <Link href="/faqs" className="block w-fit mt-4 mx-auto">
+          <Button className="bg-[#FB6520] text-white hover:bg-[#FB6520]">
+See more FAQs          </Button>
+</Link>
         </div>
       </section>
 
