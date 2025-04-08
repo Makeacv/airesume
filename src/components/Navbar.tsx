@@ -127,6 +127,12 @@ export default function Navbar() {
               >
                 Contact
               </Link>
+              <Link
+                href="/faqs"
+                className="transition hover:text-orange-500"
+              >
+                FAQ
+              </Link>
 
               <div className="ml-1 flex items-center gap-4">
                 {isSignedIn ? (
@@ -159,6 +165,14 @@ export default function Navbar() {
                   <div className="space-y-4 px-4 py-6">
                     <ThemeToggle />
 
+                    {isSignedIn &&<SheetClose asChild>
+                      <Link
+                        href={"/"}
+                        className="block transition hover:text-orange-500"
+                      >
+                        Home
+                      </Link>
+                    </SheetClose>}
                     <SheetClose asChild>
                       <Link
                         href={isSignedIn ? "/resumes" : "/"}
@@ -192,7 +206,15 @@ export default function Navbar() {
                         Contact
                       </Link>
                     </SheetClose>
+                    <SheetClose asChild>
+                      <Link
+                        href="/faqs"
+                        className="block transition hover:text-orange-500"
+                      >
+                        FAQ
 
+                      </Link>
+                    </SheetClose>
                     {!isSignedIn && (
                       <div className="mt-4 flex flex-col gap-2">
                         <SheetClose asChild>
