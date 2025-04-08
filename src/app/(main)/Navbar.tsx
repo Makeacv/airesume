@@ -100,6 +100,12 @@ Home              </Link>
               >
                 About
               </Link>
+              <Link
+                href="/faqs"
+                className="text-sm font-medium transition-colors hover:text-orange-600"
+              >
+                FAQ
+              </Link>
             </div>
           )}
         </div>
@@ -139,6 +145,14 @@ Home              </Link>
                   <ThemeToggle />
                   <SheetClose asChild>
                     <Link
+                      href="/"
+                      className="text-base font-medium transition-colors hover:text-orange-600"
+                    >
+                      Home
+                    </Link>
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <Link
                       href="/resumes"
                       className="text-base font-medium transition-colors hover:text-orange-600"
                     >
@@ -170,6 +184,14 @@ Home              </Link>
                       className="text-base font-medium transition-colors hover:text-orange-600"
                     >
                       About
+                    </Link>
+                  </SheetClose>
+                  <SheetClose asChild>
+                    <Link
+                      href="/faqs"
+                      className="text-base font-medium transition-colors hover:text-orange-600"
+                    >
+                      FAQ
                     </Link>
                   </SheetClose>
                 </div>

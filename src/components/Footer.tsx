@@ -59,6 +59,11 @@ export default function Footer() {
                 Pricing
               </Link>
             </li>
+            <li>
+              <Link href="/faqs" className="hover:text-orange-500 transition">
+                FAQ
+              </Link>
+            </li>
           </ul>
         </div>
 
