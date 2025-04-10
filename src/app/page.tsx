@@ -60,7 +60,7 @@ const reviews = [
   {
     name: "David L.",
     role: "Software Developer",
-    content: "CV Pro's AI features helped me highlight my technical skills perfectly. The smart suggestions for keywords got my CV past ATS systems, and I landed interviews at three top tech companies!",
+    content: "Make A CV ai's AI features helped me highlight my technical skills perfectly. The smart suggestions for keywords got my CV past ATS systems, and I landed interviews at three top tech companies!",
     rating: 5,
     date: "Feb 15, 2025"
   },
@@ -74,21 +74,21 @@ const reviews = [
   {
     name: "Michael P.",
     role: "Recent Graduate",
-    content: "As a fresh graduate, I was struggling to create my first professional CV. CV Pro's AI suggestions helped me transform my academic projects into compelling professional experiences.",
+    content: "As a fresh graduate, I was struggling to create my first professional CV. Make A CV ai's AI suggestions helped me transform my academic projects into compelling professional experiences.",
     rating: 5,
     date: "Jan 28, 2025"
   },
   {
     name: "Emma T.",
     role: "Career Switcher",
-    content: "Switching from teaching to UX design seemed daunting, but CV Pro helped me translate my transferable skills perfectly. The AI tool knew exactly how to phrase my experience for tech companies.",
+    content: "Switching from teaching to UX design seemed daunting, but Make A CV ai helped me translate my transferable skills perfectly. The AI tool knew exactly how to phrase my experience for tech companies.",
     rating: 5,
     date: "Feb 20, 2025"
   },
   {
     name: "James W.",
     role: "Sales Executive",
-    content: "The custom color schemes and formatting options helped my CV stand out while staying professional. Already recommended CV Pro to my entire sales team!",
+    content: "The custom color schemes and formatting options helped my CV stand out while staying professional. Already recommended Make A CV ai to my entire sales team!",
     rating: 5,
     date: "Mar 5, 2025"
   },
