@@ -25,6 +25,3 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
-
-// Just add a blank comment:
-
