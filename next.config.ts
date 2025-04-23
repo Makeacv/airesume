@@ -6,9 +6,6 @@ const nextConfig: NextConfig = {
       bodySizeLimit: "4mb",
     },
   },
-  eslint: {
-    ignoreDuringBuilds: true
-  },
   images: {
     remotePatterns: [
       {
@@ -22,6 +19,19 @@ const nextConfig: NextConfig = {
       {
         source: "/sitemap",
         destination: "/sitemap-0.xml",
+      },
+    ];
+  },
+  headers: async () => {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "index, follow",
+          },
+        ],
       },
     ];
   },
