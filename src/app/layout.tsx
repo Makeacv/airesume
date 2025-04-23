@@ -4,10 +4,8 @@ import { ThemeProvider } from "next-themes";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import Footer from "@/components/Footer";
 
-
-import LayoutWithNavbar from "@/components/layout/LayoutWithNavbar"; // ✅ new wrapper
+import LayoutWithNavbar from "@/components/layout/LayoutWithNavbar";
 import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -18,7 +16,7 @@ export const metadata: Metadata = {
     absolute: "Free CV Builder South Africa | Fast & Easy AI Tool | Make A CV",
   },
   description:
-    "Create a professional CV in minutes with our free AI tool. It’s mobile-friendly and built for South Africans. No signup or credit card needed. Sign up now!",
+    "Create a professional CV in minutes with our free AI tool. It's mobile-friendly and built for South Africans. No signup or credit card needed. Sign up now!",
 };
 
 export default function RootLayout({
@@ -27,7 +25,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider dynamic={true}>
       <html lang="en" suppressHydrationWarning>
         <head>
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6307334884532063"
@@ -51,7 +49,6 @@ export default function RootLayout({
             <LayoutWithNavbar>{children}</LayoutWithNavbar>
             <Toaster />
           </ThemeProvider>
-          <Footer />
         </body>
       </html>
     </ClerkProvider>

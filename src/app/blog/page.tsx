@@ -1,89 +1,96 @@
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 
-export default function Page() {
-  redirect('/');
+// export default function Page() {
+//   redirect('/');
+// }
+
+
+import Link from 'next/link';
+import Image from 'next/image';
+import { db } from '@/lib/db';
+import { formatDate } from '@/lib/utils';
+
+export const revalidate = 3600;
+
+export default async function BlogPage() {
+  const posts = await db.blog.findMany({
+    where: {
+      published: true,
+    },
+    orderBy: {
+      date: 'desc',
+    },
+  });
+
+  const formattedPosts = posts.map(post => ({
+    id: post.id,
+    title: post.title,
+    date: formatDate(post.date),
+    slug: post.slug,
+    description: post.description || "",
+    coverImage: post.coverImage || "/images/default-blog-cover.jpg",
+    author: post.author || "Admin",
+    tags: post.tags || [],
+  }));
+
+  return (
+    <div className="max-w-5xl mx-auto px-4 py-20">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-500 mb-6">Blog</h1>
+
+      {formattedPosts.length === 0 ? (
+        <div className="text-center py-12 bg-gray-50 dark:bg-zinc-800/50 rounded-lg">
+          <p className="text-lg">No blog posts published yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {formattedPosts.map((post) => (
+            <Link key={post.id} href={`/blog/${post.slug}`}>
+              <article className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 hover:shadow-lg hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition group">
+                <div className="aspect-video w-full overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  {post.coverImage && (
+                    <Image
+                      src={post.coverImage}
+                      alt={post.title}
+                      width={800}
+                      height={400}
+                      className="w-full h-full object-cover transition group-hover:scale-105"
+                    />
+                  )}
+                </div>
+                <div className="p-5">
+                  <h2 className="text-xl font-semibold text-orange-500 mb-1">{post.title}</h2>
+
+                  <p className="text-sm text-gray-500 dark:text-zinc-400 mb-2">
+                    {post.date} {post.author && `• ${post.author}`}
+                  </p>
+
+                  <p className="text-gray-800 dark:text-zinc-100 text-base line-clamp-3">
+                    {post.description}
+                  </p>
+
+                  {post.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mt-3">
+                      {post.tags.slice(0, 3).map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                      {post.tags.length > 3 && (
+                        <span className="px-2 py-1 text-xs rounded-full bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200">
+                          +{post.tags.length - 3} more
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </article>
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
-
-
-
-
-
-// // src/app/blog/page.tsx
-// import fs from 'fs';
-// import path from 'path';
-// import matter from 'gray-matter';
-// import Link from 'next/link';
-// import Image from 'next/image';
-
-// interface Post {
-//   title: string;
-//   date: string;
-//   slug: string;
-//   description: string;
-//   image?: string;
-//   author?: string;
-//   tags?: string[];
-// }
-
-// export default function BlogPage() {
-//   const postsDirectory = path.join(process.cwd(), 'src/content/posts');
-//   const filenames = fs.readdirSync(postsDirectory);
-
-//   const posts = filenames
-//     .map((filename) => {
-//       const filePath = path.join(postsDirectory, filename);
-//       const fileContents = fs.readFileSync(filePath, 'utf8');
-//       const { data } = matter(fileContents);
-
-//       if (!data.slug || !data.title || !data.date) return null;
-
-//       // Check if image exists in /public
-//       const publicImagePath = path.join(process.cwd(), 'public', (data.image || '').replace(/^\//, ''));
-//       const imageExists = data.image && fs.existsSync(publicImagePath);
-//       const imagePath = imageExists ? data.image : "/thumbnails/default.png";
-
-//       return {
-//         title: data.title,
-//         date: data.date,
-//         slug: data.slug,
-//         description: data.description || "",
-//         image: imagePath,
-//         author: data.author || "Unknown",
-//         tags: data.tags || [],
-//       };
-//     })
-//     .filter(Boolean) as Post[]; // ✅ Cast after filtering
-
-//   return (
-//     <div className="max-w-5xl mx-auto px-4 py-20">
-//       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-orange-500 mb-6">Blog</h1>
-
-//       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-//         {posts.map((post) => (
-//           <Link key={post.slug} href={`/blog/${post.slug}`}>
-//             <div className="rounded-xl overflow-hidden border border-zinc-800 hover:shadow-lg hover:bg-zinc-900 transition">
-//               <Image
-//                 src={post.image!}
-//                 alt={post.title}
-//                 width={800}
-//                 height={400}
-//                 className="w-full h-48 object-cover"
-//               />
-//               <div className="p-5">
-//                 <h2 className="text-xl font-semibold text-orange-500 mb-1">{post.title}</h2>
-
-//                 <p className="text-sm text-gray-500 dark:text-zinc-400 mb-2">
-//                   {post.date}
-//                 </p>
-
-//                 <p className="text-gray-800 dark:text-zinc-100 text-base line-clamp-3">
-//                   {post.description}
-//                 </p>
-//               </div>
-//             </div>
-//           </Link>
-//         ))}
-//       </div>
-//     </div>
-//   );
-// }
