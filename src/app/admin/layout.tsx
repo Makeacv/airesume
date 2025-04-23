@@ -2,7 +2,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { AdminLayoutClient } from "@/components/admin/AdminLayoutClient";
 
-const ADMIN_EMAILS = ["isadeoye02@gmail.com"];
+const ADMIN_EMAILS = ["isadeoye02@gmail.com", "info@makeacv.co.za"];
 
 export default async function AdminLayout({
   children,
