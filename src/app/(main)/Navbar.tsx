@@ -80,12 +80,12 @@ Home              </Link>
                 My CV
               </Link>
 
-              {/* <Link
+              <Link
                 href="/blog"
                 className="text-sm font-medium transition-colors hover:text-orange-600"
               >
                 Blog
-              </Link> */}
+              </Link>
 
               <Link
                 href="/contact"

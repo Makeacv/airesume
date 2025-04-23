@@ -70,7 +70,8 @@ const UserProfileButton = () => {
   );
 };
 
-export default function Navbar() {
+// Create a separate client component for the auth-dependent part
+function NavbarClient() {
   const isMobile = useMediaQuery("(max-width: 768px)");
   const { isSignedIn } = useAuth();
 
@@ -80,7 +81,7 @@ export default function Navbar() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
-            href={ "/"}
+            href={"/"}
             className="flex items-center gap-2"
           >
             <Image
@@ -104,7 +105,7 @@ export default function Navbar() {
             <div className="flex items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-300">
               <ThemeToggle />
               {isSignedIn &&<Link
-                href={ "/"}
+                href={"/"}
                 className="transition hover:text-orange-500"
               >
                 Home
@@ -115,9 +116,9 @@ export default function Navbar() {
               >
                 {isSignedIn?"My CV": 'Home'}
               </Link>
-              {/* <Link href="/blog" className="transition hover:text-orange-500">
+              <Link href="/blog" className="transition hover:text-orange-500">
                 Blog
-              </Link> */}
+              </Link>
               <Link href="/about" className="transition hover:text-orange-500">
                 About
               </Link>
@@ -176,10 +177,9 @@ export default function Navbar() {
                     <SheetClose asChild>
                       <Link
                         href={isSignedIn ? "/resumes" : "/"}
-                        className="block transition hover:text-orange-500"
+                        className="transition hover:text-orange-500"
                       >
                         {isSignedIn ? "My CV" : 'Home'}
-
                       </Link>
                     </SheetClose>
                     <SheetClose asChild>
@@ -212,7 +212,6 @@ export default function Navbar() {
                         className="block transition hover:text-orange-500"
                       >
                         FAQ
-
                       </Link>
                     </SheetClose>
                     {!isSignedIn && (
@@ -242,4 +241,53 @@ export default function Navbar() {
       </div>
     </nav>
   );
+}
+
+// Create a wrapper component that handles the client-side only rendering
+export default function Navbar() {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  
+  if (!isMounted) {
+    // Return a placeholder with the same structure but without the auth-dependent parts
+    return (
+      <nav className="fixed left-0 right-0 top-0 z-40 border-b bg-white/80 dark:border-gray-800 dark:bg-black/80">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="flex h-16 items-center justify-between">
+            {/* Logo */}
+            <Link href={"/"} className="flex items-center gap-2">
+              <Image
+                src="/logo.png"
+                alt="Logo"
+                width={120}
+                height={40}
+                className="block h-10 w-auto dark:hidden"
+              />
+              <Image
+                src="/logodark.png"
+                alt="Logo dark"
+                width={120}
+                height={40}
+                className="hidden h-10 w-auto dark:block"
+              />
+            </Link>
+            
+            {/* Simplified navigation during hydration */}
+            <div className="flex items-center gap-6 text-sm font-medium text-gray-700 dark:text-gray-300">
+              <ThemeToggle />
+              <Link href="/blog" className="transition hover:text-orange-500">Blog</Link>
+              <Link href="/about" className="transition hover:text-orange-500">About</Link>
+              <Link href="/contact" className="transition hover:text-orange-500">Contact</Link>
+              <Link href="/faqs" className="transition hover:text-orange-500">FAQ</Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+    );
+  }
+  
+  return <NavbarClient />;
 }

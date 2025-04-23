@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import { Metadata } from "next";
 
 // 1. Export metadata here
@@ -16,5 +17,8 @@ export default function ContactLayout({
 }: {
     children: React.ReactNode;
 }) {
-    return <>{children}</>;
+    return <>
+        {children}
+        <Footer />
+    </>;
 }

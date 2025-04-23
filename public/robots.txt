@@ -6,4 +6,4 @@ Allow: /
 Host: https://makeacv.ai
 
 # Sitemaps
-Sitemap: https://www.makeacv.ai/sitemap-1.xml
+Sitemap: https://makeacv.ai/sitemap.xml
