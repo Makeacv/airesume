@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   experimental: {
     serverActions: {
-      bodySizeLimit: "4mb",
+      bodySizeLimit: "50mb",
     },
   },
   eslint: {
@@ -15,6 +15,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "kontcpqrldbxg3qs.public.blob.vercel-storage.com",
       },
+      {
+        protocol: "http",
+        hostname: "localhost",
+      },
+      {
+        protocol: "https",
+        hostname: process.env.VERCEL_URL || "localhost",
+      }
     ],
   },
   rewrites: async () => {

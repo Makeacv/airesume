@@ -3,8 +3,9 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("POSTGRES_PRISMA_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 model User {
@@ -100,17 +101,29 @@ model UserSubscription {
 }
 
 model Blog {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  description String?
-  content     String
-  contentHtml String?
-  coverImage  String?
-  author      String?
-  tags        String[]
-  date        DateTime
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  published   Boolean  @default(false)
+  id              String    @id @default(cuid())
+  title           String
+  slug            String    @unique
+  description     String?   @db.Text
+  content         String    @db.Text
+  contentHtml     String    @db.Text
+  published       Boolean   @default(false)
+  date            DateTime  @default(now())
+  author          String?
+  coverImage      String?
+  coverImageAlt   String?
+  tags            String[]
+  // SEO fields
+  metaTitle       String?
+  metaDescription String?   @db.Text
+  // Timestamps
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([title])
+  @@index([published])
+  @@index([date])
+  @@index([author])
+  @@index([metaTitle])
+  @@index([title, description])
 }

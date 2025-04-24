@@ -33,6 +33,22 @@ export async function GET(
       where: {
         slug,
       },
+      select: {
+        id: true,
+        title: true,
+        slug: true,
+        description: true,
+        content: true,
+        contentHtml: true,
+        coverImage: true,
+        coverImageAlt: true,
+        author: true,
+        tags: true,
+        date: true,
+        published: true,
+        metaTitle: true,
+        metaDescription: true,
+      }
     });
     
     if (!blog) {
@@ -79,8 +95,11 @@ export async function PUT(
       updateData.content = body.content;
       updateData.contentHtml = body.contentHtml;
       updateData.coverImage = body.coverImage;
+      updateData.coverImageAlt = body.coverImageAlt;
       updateData.author = body.author;
       updateData.tags = body.tags;
+      updateData.metaTitle = body.metaTitle;
+      updateData.metaDescription = body.metaDescription;
       
       if (body.date) {
         updateData.date = new Date(body.date);

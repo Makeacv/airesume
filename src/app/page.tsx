@@ -16,7 +16,6 @@ export const metadata: Metadata = {
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FileText, Send, Brain } from "lucide-react"
 import { Metadata } from "next";
-import Footer from "@/components/Footer";
 
 const stats = [
   { number: "98%", label: "More likely to get hired" },
@@ -104,7 +103,6 @@ const reviews = [
 
 export default function Home() {
   return (
-    <>
       <main className="flex min-h-screen flex-col">
         {/* Hero Section */}
         <section className="relative bg-gradient-to-b from-gray-100 to-white dark:from-black dark:via-gray-900 dark:to-black px-4 pt-24 sm:pt-40 pb-12">
@@ -497,7 +495,5 @@ export default function Home() {
           </div>
         </section>
       </main>
-      <Footer />
-    </>
   );
 }

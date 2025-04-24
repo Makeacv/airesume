@@ -3,7 +3,6 @@ import { getUserSubscriptionLevel } from "@/lib/subscription";
 import { auth } from "@clerk/nextjs/server";
 import Navbar from "./Navbar";
 import SubscriptionLevelProvider from "./SubscriptionLevelProvider";
-import Footer from "@/components/Footer";
 
 export default async function Layout({
   children,
@@ -24,7 +23,6 @@ export default async function Layout({
         <Navbar />
         {children}
         <PremiumModal />
-        <Footer />
       </div>
     </SubscriptionLevelProvider>
   );

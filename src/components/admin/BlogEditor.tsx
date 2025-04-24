@@ -25,8 +25,11 @@ interface BlogEditorProps {
     tags: string[];
     date: string;
     coverImage?: string;
+    coverImageAlt?: string;
     author?: string;
     published?: boolean;
+    metaTitle?: string;
+    metaDescription?: string;
   };
 }
 
@@ -51,7 +54,7 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
       return new Delta().insert(initialData.content);
     }
   };
-  
+
   const [formData, setFormData] = useState({
     title: initialData?.title || "",
     slug: initialData?.slug || "",
@@ -59,8 +62,11 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
     tags: initialData?.tags?.join(", ") || "",
     date: initialData?.date || new Date().toISOString().split("T")[0],
     coverImage: initialData?.coverImage || "",
+    coverImageAlt: initialData?.coverImageAlt || "",
     author: initialData?.author || "",
     published: initialData?.published || false,
+    metaTitle: initialData?.metaTitle || "",
+    metaDescription: initialData?.metaDescription || "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -104,9 +110,12 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
         tags: string[];
         date: string;
         coverImage: string;
+        coverImageAlt: string;
         author: string;
         published: boolean;
         newSlug?: string;
+        metaTitle?: string;
+        metaDescription?: string;
       }
       
       const postData: PostData = {
@@ -118,8 +127,11 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
         tags,
         date: formData.date,
         coverImage: formData.coverImage,
+        coverImageAlt: formData.coverImageAlt,
         author: formData.author,
         published: formData.published,
+        metaTitle: formData.metaTitle,
+        metaDescription: formData.metaDescription,
       };
 
       if (mode === "edit" && initialData?.slug !== formData.slug) {
@@ -334,7 +346,7 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
                   type="file" 
                   ref={fileInputRef}
                   onChange={handleFileUpload}
-                  accept="image/*" 
+                  accept="image/jpeg,image/png,image/webp,image/gif"
                   className="hidden" 
                 />
                 
@@ -391,6 +403,48 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
                   onChange={handleChange}
                   placeholder="Author name"
                 />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="md:col-span-3">
+            <CardHeader>
+              <CardTitle>SEO Settings</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="metaTitle">Meta Title</Label>
+                  <Input
+                    id="metaTitle"
+                    name="metaTitle"
+                    value={formData.metaTitle}
+                    onChange={handleChange}
+                    placeholder="Custom title for search engines (optional)"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="metaDescription">Meta Description</Label>
+                  <Textarea
+                    id="metaDescription"
+                    name="metaDescription"
+                    value={formData.metaDescription}
+                    onChange={handleChange}
+                    placeholder="Custom description for search engines (optional)"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="coverImageAlt">Image Alt Text</Label>
+                  <Input
+                    id="coverImageAlt"
+                    name="coverImageAlt"
+                    value={formData.coverImageAlt}
+                    onChange={handleChange}
+                    placeholder="Descriptive text for the cover image"
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>
