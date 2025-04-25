@@ -4,6 +4,23 @@ import { currentUser } from "@clerk/nextjs/server";
 import fs from "fs/promises";
 import path from "path";
 import { existsSync } from "fs";
+import { Prisma } from "@prisma/client";
+
+interface BlogUpdateData {
+  published?: boolean;
+  title?: string;
+  description?: string;
+  content?: string;
+  contentHtml?: string;
+  coverImage?: string;
+  coverImageAlt?: string;
+  author?: string;
+  tags?: string[];
+  metaTitle?: string;
+  metaDescription?: string;
+  date?: Date;
+  slug?: string;
+}
 
 async function deleteFileIfExists(filePath: string) {
   try {
@@ -83,7 +100,7 @@ export async function PUT(
       return NextResponse.json({ error: "Blog not found" }, { status: 404 });
     }
   
-    const updateData: any = {};
+    const updateData: BlogUpdateData = {};
   
     if (body.published !== undefined) {
       updateData.published = body.published;
@@ -120,10 +137,10 @@ export async function PUT(
     });
     
     return NextResponse.json({ blog: updatedBlog });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error updating blog:", error);
 
-    if (error.code === "P2002") {
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === "P2002") {
       return NextResponse.json(
         { error: "A blog with this slug already exists" },
         { status: 400 }
@@ -171,8 +188,11 @@ export async function DELETE(
       success: true,
       message: "Blog post and associated files deleted successfully" 
     });
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error deleting blog:", error);
+    if (error instanceof Error) {
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
     return NextResponse.json({ error: "Error deleting blog" }, { status: 500 });
   }
 }

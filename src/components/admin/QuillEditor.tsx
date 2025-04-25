@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { forwardRef, useEffect, useLayoutEffect, useRef } from "react";
@@ -5,7 +6,7 @@ import Quill from "quill";
 import PropTypes from "prop-types";
 
 type QuillDelta = any;
-type QuillSource = string;
+type QuillSource = "user" | "api" | "silent";
 type QuillRange = { index: number; length: number } | null;
 
 interface QuillEditorProps {
