@@ -7,6 +7,7 @@ import "./globals.css";
 
 import LayoutWithNavbar from "@/components/layout/LayoutWithNavbar";
 import { Metadata } from "next";
+import Footer from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,6 +48,7 @@ export default function RootLayout({
         <body className={inter.className}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <LayoutWithNavbar>{children}</LayoutWithNavbar>
+            <Footer />
             <Toaster />
           </ThemeProvider>
         </body>

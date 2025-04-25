@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/Navbar";
 
-const pagesWithNavbar = ["/", "/blog", "/about", "/contact", "/faqs"];
+const pagesWithNavbar = ["/", "/about", "/contact", "/faqs"];
 
 export default function LayoutWithNavbar({
   children,
@@ -11,7 +11,7 @@ export default function LayoutWithNavbar({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const showNavbar = pagesWithNavbar.includes(pathname);
+  const showNavbar = pagesWithNavbar.includes(pathname) || pathname.startsWith('/blog');
 
   return (
     <>

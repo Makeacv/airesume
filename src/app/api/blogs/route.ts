@@ -77,7 +77,21 @@ export async function POST(request: NextRequest) {
     }
     
     const body = await request.json();
-    const { title, slug, description, content, contentHtml, coverImage, author, tags, date, published } = body;
+    const { 
+      title, 
+      slug, 
+      description, 
+      content, 
+      contentHtml, 
+      coverImage,
+      coverImageAlt,
+      author, 
+      tags, 
+      date, 
+      published,
+      metaTitle,
+      metaDescription
+    } = body;
     
     if (!title || !slug || !content) {
       return NextResponse.json(
@@ -94,10 +108,13 @@ export async function POST(request: NextRequest) {
         content,
         contentHtml,
         coverImage,
+        coverImageAlt,
         author,
         tags,
         date: new Date(date),
         published: published || false,
+        metaTitle,
+        metaDescription
       },
     });
     

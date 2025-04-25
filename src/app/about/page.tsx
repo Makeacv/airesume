@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import { Metadata } from "next";
 import Image from "next/image";
 
@@ -90,7 +89,6 @@ export default function AboutPage() {
           </div>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

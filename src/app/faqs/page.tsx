@@ -1,6 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
 
-import Footer from "@/components/Footer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -12,7 +11,6 @@ export const metadata: Metadata = {
 };
 export default function Page() {
   return (
-    <>
       <main className="mx-auto max-w-7xl px-4 py-24">
         <div className="text-center mb-12">
           <h1 className="text-3xl font-bold">Frequently Asked Questions</h1>
@@ -167,7 +165,5 @@ export default function Page() {
           </div>
         </div>
       </main>
-      <Footer />
-    </>
   )
 }
