@@ -7,3 +7,5 @@ Host: https://makeacv.ai
 
 # Sitemaps
 Sitemap: https://makeacv.ai/sitemap.xml
+
+Sitemap: https://makeacv.ai/sitemap1.xml
