@@ -8,29 +8,9 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model User {
-  id            String   @id
-  email         String?  @unique
-  role          Role     @default(USER)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-
-  resumes           Resume[]
-  userSubscription  UserSubscription?
-
-  @@map("users")
-}
-
-enum Role {
-  USER
-  ADMIN
-  SUPER_ADMIN
-}
-
 model Resume {
   id              String           @id @default(cuid())
-  userId          String
-  user            User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId          String          
   title           String?
   description     String?
   photoUrl        String?
@@ -88,7 +68,6 @@ model Education {
 model UserSubscription {
   id                      String   @id @default(cuid())
   userId                  String   @unique
-  user                    User?    @relation(fields: [userId], references: [id])
   stripeCustomerId        String   @unique
   stripeSubscriptionId    String   @unique
   stripePriceId           String
