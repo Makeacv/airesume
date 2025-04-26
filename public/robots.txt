@@ -2,6 +2,8 @@
 User-agent: *
 Allow: /
 
-# Sitemaps
-Sitemap: https://www.makeacv.ai/sitemap-1.xml
+# Host
+Host: https://makeacv.ai
 
+# Sitemaps
+Sitemap: https://makeacv.ai/sitemap.xml
