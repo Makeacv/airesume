@@ -27,7 +27,6 @@ export default function GeneralInfoForm({
     mode: "onChange",
   });
 
-  // track last synced values to avoid infinite loops
   const lastSynced = useRef<{ title?: string; description?: string }>({
     title: resumeData.title,
     description: resumeData.description,
