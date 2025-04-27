@@ -20,6 +20,7 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
     structuredClone(resumeData),
   );
 
+  console.log("******************************: ", "SAVING")
   const [isSaving, setIsSaving] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -56,8 +57,9 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
             `?${newSearchParams.toString()}`,
           );
         }
-      } catch {
+      } catch (error) {
         setIsError(true);
+        console.error(error);
         const { dismiss } = toast({
           variant: "destructive",
           description: (
@@ -103,6 +105,8 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
     toast,
   ]);
 
+
+  console.log("**************>>>>>>>>>>>>>>: ", "SAVED")
   return {
     isSaving,
     hasUnsavedChanges:

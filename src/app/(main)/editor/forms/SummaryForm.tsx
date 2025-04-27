@@ -10,7 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { EditorFormProps } from "@/lib/types";
 import { summarySchema, SummaryValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import GenerateSummaryButton from "./GenerateSummaryButton";
 
@@ -25,14 +25,19 @@ export default function SummaryForm({
     },
   });
 
+  const { watch, formState: { isValid } } = form;
+  const summary = watch("summary", resumeData.summary || "");
+  const lastSynced = useRef<string | undefined>(resumeData.summary);
+
   useEffect(() => {
-    const { unsubscribe } = form.watch(async (values) => {
-      const isValid = await form.trigger();
-      if (!isValid) return;
-      setResumeData({ ...resumeData, ...values });
+    if (!isValid) return;
+    if (summary === lastSynced.current) return;
+    setResumeData({
+      ...resumeData,
+      summary,
     });
-    return unsubscribe;
-  }, [form, resumeData, setResumeData]);
+    lastSynced.current = summary;
+  }, [summary, isValid, resumeData, setResumeData]);
 
   return (
     <div className="mx-auto max-w-xl space-y-6">

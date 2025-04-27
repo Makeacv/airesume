@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { EditorFormProps } from "@/lib/types";
 import { skillsSchema, SkillsValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 export default function SkillsForm({
@@ -25,21 +25,20 @@ export default function SkillsForm({
     },
   });
 
+  const { watch, formState: { isValid } } = form;
+  const skills = watch("skills") ?? [];
+  const lastSynced = useRef<string[]>(resumeData.skills || []);
+
   useEffect(() => {
-    const { unsubscribe } = form.watch(async (values) => {
-      const isValid = await form.trigger();
-      if (!isValid) return;
-      setResumeData({
-        ...resumeData,
-        skills:
-          values.skills
-            ?.filter((skill) => skill !== undefined)
-            .map((skill) => skill.trim())
-            .filter((skill) => skill !== "") || [],
-      });
+    if (!isValid) return;
+    const trimmed: string[] = skills.map((s) => s?.trim() ?? "").filter(Boolean);
+    if (JSON.stringify(trimmed) === JSON.stringify(lastSynced.current)) return;
+    setResumeData({
+      ...resumeData,
+      skills: trimmed,
     });
-    return unsubscribe;
-  }, [form, resumeData, setResumeData]);
+    lastSynced.current = trimmed;
+  }, [skills, isValid, resumeData, setResumeData]);
 
   return (
     <div className="mx-auto max-w-xl space-y-6">
