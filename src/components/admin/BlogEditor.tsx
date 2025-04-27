@@ -12,7 +12,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import QuillEditor from "./QuillEditor";
 import Quill from "quill";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 import { Switch } from "@/components/ui/switch";
 
 interface BlogEditorProps {
@@ -39,6 +39,7 @@ interface ErrorResponse {
 
 export function BlogEditor({ mode, initialData }: BlogEditorProps) {
   const router = useRouter();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const quillRef = useRef<Quill>(null);
@@ -77,10 +78,10 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
       setFormData(prev => ({
         ...prev,
         slug: value.toLowerCase()
-          .replace(/[^\w\s-]/g, '') // Remove special chars except spaces and hyphens
-          .replace(/\s+/g, '-')     // Replace spaces with hyphens
-          .replace(/-+/g, '-')      // Replace multiple hyphens with single hyphen
-          .replace(/^-+|-+$/g, '')  // Trim hyphens from start and end
+          .replace(/[^\w\s-]/g, '')
+          .replace(/\s+/g, '-')
+          .replace(/-+/g, '-')
+          .replace(/^-+|-+$/g, '')
       }));
     }
   };
@@ -153,14 +154,20 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
         throw new Error(error.error || "Failed to save blog post");
       }
 
-      toast.success(mode === "create" ? "Blog post created!" : "Blog post updated!");
+      toast({
+        variant: "default",
+        description: mode === "create" ? "Blog post created!" : "Blog post updated!",
+      });
 
       router.push("/admin/blogs");
       router.refresh();
     } catch (error: unknown) {
       console.error("Error saving post:", error);
       const errorMessage = error instanceof Error ? error.message : "Failed to save blog post";
-      toast.error(errorMessage);
+      toast({
+        variant: "destructive",
+        description: errorMessage,
+      });
       setIsLoading(false);
     }
   };
@@ -188,11 +195,17 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
       const { url } = await response.json();
 
       setFormData(prev => ({ ...prev, coverImage: url }));
-      toast.success("Image uploaded successfully");
+      toast({
+        variant: "default",
+        description: "Image uploaded successfully",
+      });
     } catch (error: unknown) {
       console.error("Error uploading image:", error);
       const errorMessage = error instanceof Error ? error.message : "Failed to upload image";
-      toast.error(errorMessage);
+      toast({
+        variant: "destructive",
+        description: errorMessage,
+      });
     } finally {
       setIsUploading(false);
       if (fileInputRef.current) {

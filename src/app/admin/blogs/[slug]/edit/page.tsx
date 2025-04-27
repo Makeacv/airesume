@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { BlogEditor } from "@/components/admin/BlogEditor";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 
 interface PostData {
   title: string;
@@ -22,7 +22,7 @@ export default function EditBlogPost() {
   const { slug } = useParams();
   const [postData, setPostData] = useState<PostData | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const { toast } = useToast();
   useEffect(() => {
     const fetchPostData = async () => {
       try {
@@ -48,7 +48,10 @@ export default function EditBlogPost() {
         });
       } catch (error) {
         console.error("Error fetching post:", error);
-        toast.error("Failed to load blog post");
+        toast({
+          variant: "destructive",
+          description: "Failed to load blog post",
+        });
       } finally {
         setLoading(false);
       }
@@ -57,7 +60,7 @@ export default function EditBlogPost() {
     if (slug) {
       fetchPostData();
     }
-  }, [slug]);
+  }, [slug, toast]);
 
   if (loading) {
     return (

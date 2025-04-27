@@ -107,4 +107,4 @@ QuillEditor.propTypes = {
   defaultValue: PropTypes.object,
   onTextChange: PropTypes.func,
   onSelectionChange: PropTypes.func,
-}; 
+};

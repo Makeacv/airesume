@@ -7,7 +7,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { db } from '@/lib/db';
+import prisma from '@/lib/prisma';
 import { formatDate } from '@/lib/utils';
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -15,6 +15,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 export const revalidate = 3600;
 
 const POSTS_PER_PAGE = 12;
+
+interface Post {
+  id: string;
+  title: string;
+  date: Date;
+  slug: string;
+  description?: string | null;
+  coverImage?: string | null;
+  author?: string | null;
+  tags?: string[];
+}
 
 interface BlogPageProps {
   searchParams: Promise<{ page?: string }>;
@@ -26,7 +37,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   const skip = (currentPage - 1) * POSTS_PER_PAGE;
 
   const [posts, totalPosts] = await Promise.all([
-    db.blog.findMany({
+    prisma.blog.findMany({
       where: {
         published: true,
       },
@@ -36,7 +47,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       skip,
       take: POSTS_PER_PAGE,
     }),
-    db.blog.count({
+    prisma.blog.count({
       where: {
         published: true,
       },
@@ -45,7 +56,7 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
 
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
 
-  const formattedPosts = posts.map(post => ({
+  const formattedPosts = posts.map((post: Post) => ({
     id: post.id,
     title: post.title,
     date: formatDate(post.date),

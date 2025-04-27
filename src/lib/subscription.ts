@@ -6,34 +6,29 @@ export type SubscriptionLevel = "free" | "pro" | "pro_plus";
 
 export const getUserSubscriptionLevel = cache(
   async (userId: string): Promise<SubscriptionLevel> => {
-    try {
-      const subscription = await prisma.userSubscription.findUnique({
-        where: {
-          userId,
-        },
-      });
+    const subscription = await prisma.userSubscription.findUnique({
+      where: {
+        userId,
+      },
+    });
 
-      if (!subscription || subscription.stripeCurrentPeriodEnd < new Date()) {
-        return "free";
-      }
-
-      if (
-        subscription.stripePriceId === env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_MONTHLY
-      ) {
-        return "pro";
-      }
-
-      if (
-        subscription.stripePriceId ===
-        env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_PLUS_MONTHLY
-      ) {
-        return "pro_plus";
-      }
-
+    if (!subscription || subscription.stripeCurrentPeriodEnd < new Date()) {
       return "free";
-    } catch (error) {
-      console.error("Error checking subscription:", error);
-      return "free"; // Fallback to free tier on error
     }
+
+    if (
+      subscription.stripePriceId === env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_MONTHLY
+    ) {
+      return "pro";
+    }
+
+    if (
+      subscription.stripePriceId ===
+      env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_PLUS_MONTHLY
+    ) {
+      return "pro_plus";
+    }
+
+    throw new Error("Invalid subscription");
   },
 );

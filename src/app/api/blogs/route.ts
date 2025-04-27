@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 import { Prisma } from "@prisma/client";
 
@@ -43,7 +43,7 @@ export async function GET(request: NextRequest) {
         console.warn("Tag search not supported, skipping");
       }
       
-      const blogs = await db.blog.findMany({
+      const blogs = await prisma.blog.findMany({
         where: whereClause,
         orderBy: { date: "desc" },
       });
@@ -52,8 +52,8 @@ export async function GET(request: NextRequest) {
     }
     
     const [total, blogs] = await Promise.all([
-      db.blog.count({ where: whereClause }),
-      db.blog.findMany({
+      prisma.blog.count({ where: whereClause }),
+      prisma.blog.findMany({
         where: whereClause,
         orderBy: { date: "desc" },
         skip,
@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    const blog = await db.blog.create({
+    const blog = await prisma.blog.create({
       data: {
         title,
         slug,

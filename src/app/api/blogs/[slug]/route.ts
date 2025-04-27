@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 import fs from "fs/promises";
 import path from "path";
@@ -46,7 +46,7 @@ export async function GET(
   try {
     const { slug } = await params;
 
-    const blog = await db.blog.findUnique({
+    const blog = await prisma.blog.findUnique({
       where: {
         slug,
       },
@@ -92,7 +92,7 @@ export async function PUT(
     const { slug } = await params;
     const body = await request.json();
 
-    const existingBlog = await db.blog.findUnique({
+    const existingBlog = await prisma.blog.findUnique({
       where: { slug },
     });
     
@@ -131,7 +131,7 @@ export async function PUT(
       return NextResponse.json({ blog: existingBlog });
     }
 
-    const updatedBlog = await db.blog.update({
+    const updatedBlog = await prisma.blog.update({
       where: { slug },
       data: updateData,
     });
@@ -163,7 +163,7 @@ export async function DELETE(
     
     const { slug } = await params;
 
-    const existingBlog = await db.blog.findUnique({
+    const existingBlog = await prisma.blog.findUnique({
       where: { slug },
     });
     
@@ -180,7 +180,7 @@ export async function DELETE(
       }
     }
 
-    await db.blog.delete({
+    await prisma.blog.delete({
       where: { slug },
     });
     

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import { db } from '@/lib/db';
+import prisma from '@/lib/prisma';
 import { formatDate } from '@/lib/utils';
 import { cache } from 'react';
 import { 
@@ -22,7 +22,7 @@ interface BlogPostPageProps {
 }
 
 const getBlogPost = cache(async (slug: string, isPreview: boolean) => {
-  const post = await db.blog.findFirst({
+  const post = await prisma.blog.findFirst({
     where: {
       slug,
       ...(isPreview ? {} : { published: true }),

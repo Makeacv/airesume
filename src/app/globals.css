@@ -2,10 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Quill editor styles */
+
 @import 'quill/dist/quill.snow.css';
 
-/* Custom Quill editor height */
 .quill-editor {
   min-height: 400px;
 }
@@ -93,6 +92,14 @@ body {
   #resumePreviewContent {
     zoom: 1 !important;
     padding: 0;
+    max-width: 100%;
+    overflow: visible !important;
+  }
+  
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    background: white !important;
   }
 }
 

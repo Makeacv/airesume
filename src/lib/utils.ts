@@ -42,6 +42,7 @@ export function mapToResumeValues(data: ResumeServerData): ResumeValues {
     email: data.email || undefined,
     nationality: data.nationality || undefined, // ✅ Add this
     idNumber: data.idNumber || undefined,       // ✅ And this
+    driverLicense: data.driverLicense || undefined,
     workExperiences: data.workExperiences.map((exp) => ({
       position: exp.position || undefined,
       company: exp.company || undefined,

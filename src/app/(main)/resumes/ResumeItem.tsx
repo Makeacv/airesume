@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/hooks/use-toast";
+import useWindowSize from "@/hooks/useWindowSize";
 import { ResumeServerData } from "@/lib/types";
 import { mapToResumeValues } from "@/lib/utils";
 import { formatDate } from "date-fns";
@@ -33,11 +34,145 @@ interface ResumeItemProps {
 
 export default function ResumeItem({ resume }: ResumeItemProps) {
   const contentRef = useRef<HTMLDivElement>(null);
+  const { width: screenWidth } = useWindowSize();
 
-  const reactToPrintFn = useReactToPrint({
+  const handlePrintDesktop = useReactToPrint({
     contentRef,
     documentTitle: resume.title || "CV",
   });
+
+  const handlePrint = () => {
+    const isMobile = screenWidth < 769;
+    
+    if (isMobile && contentRef.current) {
+      const printWindow = window.open('', '_blank');
+      
+      if (printWindow) {
+        printWindow.document.write(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>${resume.title || "Resume"}</title>
+              <style>
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+                * {
+                  margin: 0;
+                  padding: 0;
+                  box-sizing: border-box;
+                }
+
+                body {
+                  background: white;
+                  width: 100%;
+                  -webkit-print-color-adjust: exact !important;
+                  print-color-adjust: exact !important;
+                }
+
+                #resumePreviewContent {
+                  width: 100%;
+                  padding: 24px;
+                  font-family: 'Inter', sans-serif;
+                }
+
+                /* Strengths section specific styles */
+                .section-title {
+                  color: #8424FF;
+                  font-size: 20px;
+                  font-weight: 600;
+                  margin-bottom: 16px;
+                }
+
+                .skills-container {
+                  display: flex;
+                  flex-wrap: wrap;
+                  gap: 8px;
+                  width: 100%;
+                }
+
+                .badge {
+                  background-color: #8424FF !important;
+                  color: white !important;
+                  padding: 6px 16px;
+                  border-radius: 9999px;
+                  font-size: 14px;
+                  font-weight: 500;
+                  line-height: 20px;
+                  display: inline-flex;
+                  align-items: center;
+                  white-space: nowrap;
+                  text-transform: lowercase;
+                }
+
+                /* Preserve other necessary styles */
+                .space-y-6 { margin-top: 1.5rem; }
+                .space-y-3 { margin-top: 0.75rem; }
+                .break-inside-avoid { break-inside: avoid; }
+                .flex { display: flex; }
+                .flex-wrap { flex-wrap: wrap; }
+                .gap-2 { gap: 0.5rem; }
+
+                @media print {
+                  @page {
+                    size: A4;
+                    margin: 0.6cm;
+                  }
+
+                  body {
+                    width: 100%;
+                    min-height: 100vh;
+                  }
+
+                  #resumePreviewContent {
+                    width: 100%;
+                  }
+
+                  .badge {
+                    background-color: #8424FF !important;
+                    color: white !important;
+                    -webkit-print-color-adjust: exact !important;
+                    print-color-adjust: exact !important;
+                  }
+                }
+              </style>
+            </head>
+            <body>
+              <div id="resumePreviewContent">
+                ${contentRef.current.innerHTML}
+              </div>
+            </body>
+          </html>
+        `);
+
+        const styleSheet = printWindow.document.createElement("style");
+        styleSheet.textContent = `
+          .badge {
+            background-color: #8424FF !important;
+            color: white !important;
+          }
+        `;
+        printWindow.document.head.appendChild(styleSheet);
+        
+        printWindow.document.close();
+        
+        setTimeout(() => {
+          try {
+            printWindow.focus();
+            printWindow.print();
+          } catch (e) {
+            console.error("Print failed:", e);
+            handlePrintDesktop();
+          }
+        }, 500);
+      } else {
+        handlePrintDesktop();
+      }
+    } else {
+      handlePrintDesktop();
+    }
+  };
 
   const wasUpdated = resume.updatedAt !== resume.createdAt;
 
@@ -71,7 +206,7 @@ export default function ResumeItem({ resume }: ResumeItemProps) {
           <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-white to-transparent" />
         </Link>
       </div>
-      <MoreMenu resumeId={resume.id} onPrintClick={reactToPrintFn} />
+      <MoreMenu resumeId={resume.id} onPrintClick={handlePrint} />
     </div>
   );
 }

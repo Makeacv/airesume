@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Plus, Pencil, Trash2, Search, ChevronLeft, ChevronRight, ExternalLink, Filter } from "lucide-react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
+import { useToast } from "@/hooks/use-toast";
 import {
   Pagination,
   PaginationContent,
@@ -51,7 +51,7 @@ export default function AdminBlogsPage() {
   const [totalBlogs, setTotalBlogs] = useState(0);
   const [filterStatus, setFilterStatus] = useState<FilterState>("all");
   const blogsPerPage = 9;
-  
+  const { toast } = useToast();
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -67,7 +67,10 @@ export default function AdminBlogsPage() {
         setTotalBlogs(data.total);
       } catch (error) {
         console.error("Error fetching blogs:", error);
-        toast.error("Failed to load blog posts");
+        toast({
+          variant: "destructive",
+          description: "Failed to load blog posts",
+        });
       } finally {
         setLoading(false);
         setPaginationLoading(false);
@@ -75,7 +78,7 @@ export default function AdminBlogsPage() {
     };
     
     fetchBlogs();
-  }, [currentPage]);
+  }, [currentPage, toast]);
 
   useEffect(() => {
     if (blogs.length === 0) return;
@@ -124,7 +127,10 @@ export default function AdminBlogsPage() {
         setCurrentPage(1);
       } catch (error) {
         console.error("Error searching blogs:", error);
-        toast.error("Failed to search blog posts");
+        toast({
+          variant: "destructive",
+          description: "Failed to search blog posts",
+        });
       } finally {
         setLoading(false);
       }
@@ -135,7 +141,7 @@ export default function AdminBlogsPage() {
     }, 300);
     
     return () => clearTimeout(timerId);
-  }, [searchQuery, currentPage, blogsPerPage]);
+  }, [searchQuery, currentPage, blogsPerPage, toast]);
   
   const handleDeleteBlog = async (slug: string) => {
     if (!confirm("Are you sure you want to delete this blog post?")) {
@@ -153,14 +159,20 @@ export default function AdminBlogsPage() {
       
       const updatedBlogs = blogs.filter(blog => blog.slug !== slug);
       setBlogs(updatedBlogs);
-      toast.success("Blog post deleted successfully");
+      toast({
+        variant: "default",
+        description: "Blog post deleted successfully",
+      });
       
       if (updatedBlogs.length === 0 && currentPage > 1) {
         setCurrentPage(currentPage - 1);
       }
     } catch (error) {
       console.error("Error deleting blog:", error);
-      toast.error("Failed to delete blog post");
+      toast({
+        variant: "destructive",
+        description: "Failed to delete blog post",
+      });
     }
   };
   
@@ -186,14 +198,18 @@ export default function AdminBlogsPage() {
           : blog
       ));
       
-      toast.success(
-        currentStatus 
+      toast({
+        variant: "default",
+        description: currentStatus 
           ? "Blog post unpublished" 
           : "Blog post published"
-      );
+      });
     } catch (error) {
       console.error("Error updating blog status:", error);
-      toast.error("Failed to update blog status");
+      toast({
+        variant: "destructive",
+        description: "Failed to update blog status",
+      });
     }
   };
 

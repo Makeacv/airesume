@@ -56,9 +56,8 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
             `?${newSearchParams.toString()}`,
           );
         }
-      } catch (error) {
+      } catch {
         setIsError(true);
-        console.error(error);
         const { dismiss } = toast({
           variant: "destructive",
           description: (

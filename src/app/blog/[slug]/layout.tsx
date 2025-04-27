@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import { db } from "@/lib/db";
+import prisma from "@/lib/prisma";
 import LayoutWithNavbar from "@/components/layout/LayoutWithNavbar";
 
 interface BlogPostLayoutProps {
@@ -11,7 +11,7 @@ interface BlogPostLayoutProps {
 
 export async function generateMetadata({ params }: BlogPostLayoutProps): Promise<Metadata> {
     const { slug } = await params;
-    const post = await db.blog.findFirst({
+    const post = await prisma.blog.findFirst({
         where: {
         slug: slug,
         published: true,
