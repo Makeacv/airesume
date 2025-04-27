@@ -212,7 +212,6 @@ export default function Navbar() {
                         className="block transition hover:text-orange-500"
                       >
                         FAQ
-
                       </Link>
                     </SheetClose>
                     {!isSignedIn && (
