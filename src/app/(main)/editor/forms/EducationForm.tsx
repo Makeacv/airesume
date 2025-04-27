@@ -43,15 +43,14 @@ export default function EducationForm({
     defaultValues: {
       educations: resumeData.educations || [],
     },
+    mode: 'onChange',
   });
 
   useEffect(() => {
-    const { unsubscribe } = form.watch(async (values) => {
-      const isValid = await form.trigger();
-      if (!isValid) return;
+    const { unsubscribe } = form.watch((values) => {
       setResumeData({
         ...resumeData,
-        educations: values.educations?.filter((edu) => edu !== undefined) || [],
+        educations: (values.educations ?? []).filter((edu): edu is NonNullable<typeof edu> => edu !== undefined),
       });
     });
     return unsubscribe;

@@ -46,12 +46,11 @@ export default function WorkExperienceForm({
     defaultValues: {
       workExperiences: resumeData.workExperiences || [],
     },
+    mode: 'onChange',
   });
 
   useEffect(() => {
-    const { unsubscribe } = form.watch(async (values) => {
-      const isValid = await form.trigger();
-      if (!isValid) return;
+    const { unsubscribe } = form.watch((values) => {
       setResumeData({
         ...resumeData,
         workExperiences:

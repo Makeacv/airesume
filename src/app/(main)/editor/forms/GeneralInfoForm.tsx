@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { EditorFormProps } from "@/lib/types";
 import { generalInfoSchema, GeneralInfoValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 
 export default function GeneralInfoForm({
@@ -24,16 +24,30 @@ export default function GeneralInfoForm({
       title: resumeData.title || "",
       description: resumeData.description || "",
     },
+    mode: "onChange",
   });
 
+  const lastSynced = useRef<{ title?: string; description?: string }>({
+    title: resumeData.title,
+    description: resumeData.description,
+  });
+
+  const { watch, formState: { isValid } } = form;
+  const title = watch("title");
+  const description = watch("description");
+
   useEffect(() => {
-    const { unsubscribe } = form.watch(async (values) => {
-      const isValid = await form.trigger();
-      if (!isValid) return;
-      setResumeData({ ...resumeData, ...values });
+    if (!isValid) return;
+    const { title: lastTitle, description: lastDesc } = lastSynced.current;
+    if (title === lastTitle && description === lastDesc) return;
+    // Merge updated fields into parent state using resumeData prop
+    setResumeData({
+      ...resumeData,
+      title,
+      description,
     });
-    return unsubscribe;
-  }, [form, resumeData, setResumeData]);
+    lastSynced.current = { title, description };
+  }, [title, description, isValid, resumeData, setResumeData]);
 
   return (
     <div className="mx-auto max-w-xl space-y-6">

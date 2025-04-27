@@ -19,12 +19,11 @@ interface ResumeEditorProps {
 export default function ResumeEditor({ resumeToEdit }: ResumeEditorProps) {
   const searchParams = useSearchParams();
 
-  const [resumeData, setResumeData] = useState<ResumeValues>(
-    resumeToEdit ? mapToResumeValues(resumeToEdit) : {},
-  );
+  const initialData = resumeToEdit ? mapToResumeValues(resumeToEdit) : {};
+  const [resumeData, setResumeData] = useState<ResumeValues>(initialData);
 
   const [showSmResumePreview, setShowSmResumePreview] = useState(false);
- const contentRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const { isSaving, hasUnsavedChanges } = useAutoSaveResume(resumeData);
 

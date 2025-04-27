@@ -9,14 +9,12 @@ import { saveResume } from "./actions";
 
 export default function useAutoSaveResume(resumeData: ResumeValues) {
   const searchParams = useSearchParams();
-
   const { toast } = useToast();
 
   const debouncedResumeData = useDebounce(resumeData, 1500);
 
-  const [resumeId, setResumeId] = useState(resumeData.id);
-
-  const [lastSavedData, setLastSavedData] = useState(
+  const [resumeId, setResumeId] = useState<string | undefined>(resumeData.id);
+  const [lastSavedData, setLastSavedData] = useState<ResumeValues>(
     structuredClone(resumeData),
   );
 
@@ -46,14 +44,13 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
 
         setResumeId(updatedResume.id);
         setLastSavedData(newData);
-
         if (searchParams.get("resumeId") !== updatedResume.id) {
-          const newSearchParams = new URLSearchParams(searchParams);
-          newSearchParams.set("resumeId", updatedResume.id);
+          const newParams = new URLSearchParams(searchParams);
+          newParams.set("resumeId", updatedResume.id);
           window.history.replaceState(
             null,
             "",
-            `?${newSearchParams.toString()}`,
+            `?${newParams.toString()}`,
           );
         }
       } catch {
@@ -79,12 +76,6 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
         setIsSaving(false);
       }
     }
-
-    console.log(
-      "debouncedResumeData",
-      JSON.stringify(debouncedResumeData, fileReplacer),
-    );
-    console.log("lastSavedData", JSON.stringify(lastSavedData, fileReplacer));
 
     const hasUnsavedChanges =
       JSON.stringify(debouncedResumeData, fileReplacer) !==

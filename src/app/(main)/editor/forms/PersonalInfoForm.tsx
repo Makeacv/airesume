@@ -23,6 +23,7 @@ export default function PersonalInfoForm({
   const form = useForm<PersonalInfoValues>({
     resolver: zodResolver(personalInfoSchema),
     defaultValues: {
+      photo: resumeData.photo instanceof File ? resumeData.photo : undefined,
       firstName: resumeData.firstName || "",
       lastName: resumeData.lastName || "",
       jobTitle: resumeData.jobTitle || "",
@@ -34,16 +35,40 @@ export default function PersonalInfoForm({
       idNumber: resumeData.idNumber || "",
       driverLicense: resumeData.driverLicense || false,
     },
+    mode: "onChange",
   });
 
+  const { watch, formState: { isValid } } = form;
+  const values = watch();
+
+  // Track last synced values to avoid loops
+  const lastSynced = useRef<PersonalInfoValues>(form.getValues());
+
   useEffect(() => {
-    const { unsubscribe } = form.watch(async (values) => {
-      const isValid = await form.trigger();
-      if (!isValid) return;
-      setResumeData({ ...resumeData, ...values });
+    if (!isValid) return;
+    const prev = lastSynced.current;
+    // Only update when values change
+    if (
+      prev.photo === values.photo &&
+      prev.firstName === values.firstName &&
+      prev.lastName === values.lastName &&
+      prev.jobTitle === values.jobTitle &&
+      prev.city === values.city &&
+      prev.country === values.country &&
+      prev.phone === values.phone &&
+      prev.email === values.email &&
+      prev.nationality === values.nationality &&
+      prev.idNumber === values.idNumber &&
+      prev.driverLicense === values.driverLicense
+    ) {
+      return;
+    }
+    setResumeData({
+      ...resumeData,
+      ...values,
     });
-    return unsubscribe;
-  }, [form, resumeData, setResumeData]);
+    lastSynced.current = values;
+  }, [values, isValid, resumeData, setResumeData]);
 
   const photoInputRef = useRef<HTMLInputElement>(null);
 
