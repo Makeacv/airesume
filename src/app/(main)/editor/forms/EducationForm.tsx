@@ -31,7 +31,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GripHorizontal } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useFieldArray, useForm, UseFormReturn } from "react-hook-form";
 
 export default function EducationForm({
@@ -43,21 +43,18 @@ export default function EducationForm({
     defaultValues: {
       educations: resumeData.educations || [],
     },
-    mode: "onChange",
+    mode: 'onChange',
   });
 
-  const { watch } = form;
-  const educations = watch("educations") ?? [];
-  const lastSynced = useRef<EducationValues["educations"]>(resumeData.educations || []);
   useEffect(() => {
-    const serialized = JSON.stringify(educations);
-    if (serialized === JSON.stringify(lastSynced.current)) return;
-    setResumeData({
-      ...resumeData,
-      educations: educations.filter((edu) => edu !== undefined),
+    const { unsubscribe } = form.watch((values) => {
+      setResumeData({
+        ...resumeData,
+        educations: (values.educations ?? []).filter((edu): edu is NonNullable<typeof edu> => edu !== undefined),
+      });
     });
-    lastSynced.current = educations;
-  }, [educations]);
+    return unsubscribe;
+  }, [form, resumeData, setResumeData]);
 
   const { fields, append, remove, move } = useFieldArray({
     control: form.control,

@@ -9,18 +9,15 @@ import { saveResume } from "./actions";
 
 export default function useAutoSaveResume(resumeData: ResumeValues) {
   const searchParams = useSearchParams();
-
   const { toast } = useToast();
 
   const debouncedResumeData = useDebounce(resumeData, 1500);
 
-  const [resumeId, setResumeId] = useState(resumeData.id);
-
-  const [lastSavedData, setLastSavedData] = useState(
+  const [resumeId, setResumeId] = useState<string | undefined>(resumeData.id);
+  const [lastSavedData, setLastSavedData] = useState<ResumeValues>(
     structuredClone(resumeData),
   );
 
-  console.log("******************************: ", "SAVING")
   const [isSaving, setIsSaving] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -47,19 +44,17 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
 
         setResumeId(updatedResume.id);
         setLastSavedData(newData);
-
         if (searchParams.get("resumeId") !== updatedResume.id) {
-          const newSearchParams = new URLSearchParams(searchParams);
-          newSearchParams.set("resumeId", updatedResume.id);
+          const newParams = new URLSearchParams(searchParams);
+          newParams.set("resumeId", updatedResume.id);
           window.history.replaceState(
             null,
             "",
-            `?${newSearchParams.toString()}`,
+            `?${newParams.toString()}`,
           );
         }
-      } catch (error) {
+      } catch {
         setIsError(true);
-        console.error(error);
         const { dismiss } = toast({
           variant: "destructive",
           description: (
@@ -82,12 +77,6 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
       }
     }
 
-    console.log(
-      "debouncedResumeData",
-      JSON.stringify(debouncedResumeData, fileReplacer),
-    );
-    console.log("lastSavedData", JSON.stringify(lastSavedData, fileReplacer));
-
     const hasUnsavedChanges =
       JSON.stringify(debouncedResumeData, fileReplacer) !==
       JSON.stringify(lastSavedData, fileReplacer);
@@ -105,8 +94,6 @@ export default function useAutoSaveResume(resumeData: ResumeValues) {
     toast,
   ]);
 
-
-  console.log("**************>>>>>>>>>>>>>>: ", "SAVED")
   return {
     isSaving,
     hasUnsavedChanges:

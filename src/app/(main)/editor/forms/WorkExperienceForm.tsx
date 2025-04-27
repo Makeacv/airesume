@@ -33,7 +33,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { GripHorizontal } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useFieldArray, useForm, UseFormReturn } from "react-hook-form";
 import GenerateWorkExperienceButton from "./GenerateWorkExperienceButton";
 
@@ -46,22 +46,19 @@ export default function WorkExperienceForm({
     defaultValues: {
       workExperiences: resumeData.workExperiences || [],
     },
+    mode: 'onChange',
   });
 
-  const { watch, formState: { isValid } } = form;
-  const workExperiences = watch("workExperiences", resumeData.workExperiences || []);
-  const lastSynced = useRef<WorkExperienceValues["workExperiences"]>(resumeData.workExperiences || []);
-
   useEffect(() => {
-    if (!isValid) return;
-    const filtered = workExperiences?.filter((exp) => exp !== undefined) || [];
-    if (JSON.stringify(filtered) === JSON.stringify(lastSynced.current)) return;
-    setResumeData({
-      ...resumeData,
-      workExperiences: filtered,
+    const { unsubscribe } = form.watch((values) => {
+      setResumeData({
+        ...resumeData,
+        workExperiences:
+          values.workExperiences?.filter((exp) => exp !== undefined) || [],
+      });
     });
-    lastSynced.current = filtered;
-  }, [workExperiences, isValid, resumeData, setResumeData]);
+    return unsubscribe;
+  }, [form, resumeData, setResumeData]);
 
   const { fields, append, remove, move } = useFieldArray({
     control: form.control,

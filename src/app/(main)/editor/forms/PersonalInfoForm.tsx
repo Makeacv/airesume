@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { EditorFormProps } from "@/lib/types";
-import { personalInfoSchema, PersonalInfoValues, ResumeValues } from "@/lib/validation";
+import { personalInfoSchema, PersonalInfoValues } from "@/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
