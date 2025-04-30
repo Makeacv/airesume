@@ -6,6 +6,7 @@ import { formatDate } from "date-fns";
 import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { Badge } from "./ui/badge";
+import { ResumeDocumentStyles } from "@/styles/ResumeDocumentStyles";
 
 interface ResumePreviewProps {
   resumeData: ResumeValues;
@@ -38,6 +39,7 @@ export default function ResumePreview({
         ref={contentRef}
         id="resumePreviewContent"
       >
+        <ResumeDocumentStyles colorHex={resumeData.colorHex} />
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
         <WorkExperienceSection resumeData={resumeData} />
@@ -79,7 +81,7 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
   }, [photo]);
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-6 personal-info-header">
       {photoSrc && (
         <Image
           src={photoSrc}
@@ -150,7 +152,7 @@ function SummarySection({ resumeData }: ResumeSectionProps) {
       />
       <div className="break-inside-avoid space-y-3">
         <p
-          className="text-lg font-semibold"
+          className="section-title"
           style={{
             color: colorHex,
           }}
@@ -182,7 +184,7 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
       />
       <div className="space-y-3">
         <p
-          className="text-lg font-semibold"
+          className="section-title"
           style={{
             color: colorHex,
           }}
@@ -192,7 +194,7 @@ function WorkExperienceSection({ resumeData }: ResumeSectionProps) {
         {workExperiencesNotEmpty.map((exp, index) => (
           <div key={index} className="break-inside-avoid space-y-1">
             <div
-              className="flex items-center justify-between text-sm font-semibold"
+              className="flex items-center justify-between text-sm font-semibold experience-header"
               style={{
                 color: colorHex,
               }}
@@ -233,7 +235,7 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
       />
       <div className="space-y-3">
         <p
-          className="text-lg font-semibold"
+          className="section-title"
           style={{
             color: colorHex,
           }}
@@ -243,7 +245,7 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
         {educationsNotEmpty.map((edu, index) => (
           <div key={index} className="break-inside-avoid space-y-1">
             <div
-              className="flex items-center justify-between text-sm font-semibold"
+              className="flex items-center justify-between text-sm font-semibold education-header"
               style={{
                 color: colorHex,
               }}
@@ -279,18 +281,18 @@ function SkillsSection({ resumeData }: ResumeSectionProps) {
       />
       <div className="break-inside-avoid space-y-3">
         <p
-          className="text-lg font-semibold"
+          className="section-title"
           style={{
             color: colorHex,
           }}
         >
           Strengths
         </p>
-        <div className="flex break-inside-avoid flex-wrap gap-2">
+        <div className="skills-container">
           {skills?.map((skill, index) => (
             <Badge
               key={index}
-              className="rounded-md bg-black text-white hover:bg-black"
+              className="badge"
               style={{
                 backgroundColor: colorHex,
                 borderRadius:
