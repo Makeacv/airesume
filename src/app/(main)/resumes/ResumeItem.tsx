@@ -48,6 +48,8 @@ export default function ResumeItem({ resume }: ResumeItemProps) {
       const printWindow = window.open('', '_blank');
       
       if (printWindow) {
+        const resumeColorHex = mapToResumeValues(resume).colorHex || "#8424FF";
+        
         printWindow.document.write(`
           <!DOCTYPE html>
           <html>
@@ -66,9 +68,13 @@ export default function ResumeItem({ resume }: ResumeItemProps) {
 
                 body {
                   background: white;
-                  width: 100%;
+                  width: 210mm;
+                  min-height: 297mm;
+                  margin: 0;
+                  padding: 0;
                   -webkit-print-color-adjust: exact !important;
                   print-color-adjust: exact !important;
+                  color-adjust: exact !important;
                 }
 
                 #resumePreviewContent {
@@ -77,14 +83,66 @@ export default function ResumeItem({ resume }: ResumeItemProps) {
                   font-family: 'Inter', sans-serif;
                 }
 
-                /* Strengths section specific styles */
-                .section-title {
-                  color: #8424FF;
-                  font-size: 20px;
-                  font-weight: 600;
-                  margin-bottom: 16px;
+                /* Personal info header */
+                .personal-info-header {
+                  display: flex;
+                  flex-direction: row;
+                  align-items: center;
+                  gap: 16px;
+                }
+                .personal-info-header img {
+                  width: 100px;
+                  height: 100px;
+                  object-fit: cover;
+                }
+                .personal-info-header .text-3xl {
+                  font-size: 2rem;
+                  margin: 0;
+                  color: ${resumeColorHex};
+                }
+                .personal-info-header .font-medium {
+                  font-size: 1rem;
+                  color: ${resumeColorHex};
                 }
 
+                /* Divider lines */
+                hr {
+                  border: none;
+                  border-top: 3px solid ${resumeColorHex};
+                  margin: 1rem 0;
+                  width: 100%;
+                }
+
+                /* Section titles */
+                .section-title {
+                  color: ${resumeColorHex};
+                  font-size: 1.25rem;
+                  font-weight: 600;
+                  margin-bottom: 0.75rem;
+                }
+
+                /* Work/Education entries */
+                .experience-header,
+                .education-header {
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: flex-start;
+                  gap: 8px;
+                }
+                .experience-header .text-sm,
+                .education-header .text-sm {
+                  font-size: 0.875rem;
+                  font-weight: 600;
+                  color: ${resumeColorHex};
+                }
+                .experience-header + p,
+                .education-header + p {
+                  font-size: 0.875rem;
+                  font-weight: 600;
+                  margin: 0.25rem 0;
+                }
+
+                /* Skills section */
                 .skills-container {
                   display: flex;
                   flex-wrap: wrap;
@@ -93,7 +151,7 @@ export default function ResumeItem({ resume }: ResumeItemProps) {
                 }
 
                 .badge {
-                  background-color: #8424FF !important;
+                  background-color: ${resumeColorHex} !important;
                   color: white !important;
                   padding: 6px 16px;
                   border-radius: 9999px;
@@ -103,37 +161,39 @@ export default function ResumeItem({ resume }: ResumeItemProps) {
                   display: inline-flex;
                   align-items: center;
                   white-space: nowrap;
-                  text-transform: lowercase;
                 }
 
-                /* Preserve other necessary styles */
-                .space-y-6 { margin-top: 1.5rem; }
-                .space-y-3 { margin-top: 0.75rem; }
+                /* Utility classes */
+                .space-y-6 > * + * { margin-top: 1.5rem; }
+                .space-y-3 > * + * { margin-top: 0.75rem; }
                 .break-inside-avoid { break-inside: avoid; }
                 .flex { display: flex; }
                 .flex-wrap { flex-wrap: wrap; }
                 .gap-2 { gap: 0.5rem; }
+                .whitespace-pre-line {
+                  white-space: pre-wrap;
+                  word-break: break-word;
+                }
 
                 @media print {
                   @page {
-                    size: A4;
+                    size: A4 portrait;
                     margin: 0.6cm;
                   }
 
-                  body {
-                    width: 100%;
-                    min-height: 100vh;
+                  html, body {
+                    width: 210mm;
+                    height: 297mm;
+                    margin: 0;
+                    padding: 0;
                   }
 
                   #resumePreviewContent {
                     width: 100%;
-                  }
-
-                  .badge {
-                    background-color: #8424FF !important;
-                    color: white !important;
-                    -webkit-print-color-adjust: exact !important;
-                    print-color-adjust: exact !important;
+                    min-height: 297mm;
+                    margin: 0 auto;
+                    padding: 0.6cm;
+                    box-sizing: border-box;
                   }
                 }
               </style>
@@ -145,15 +205,6 @@ export default function ResumeItem({ resume }: ResumeItemProps) {
             </body>
           </html>
         `);
-
-        const styleSheet = printWindow.document.createElement("style");
-        styleSheet.textContent = `
-          .badge {
-            background-color: #8424FF !important;
-            color: white !important;
-          }
-        `;
-        printWindow.document.head.appendChild(styleSheet);
         
         printWindow.document.close();
         

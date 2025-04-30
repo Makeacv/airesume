@@ -89,17 +89,35 @@ body {
 }
 
 @media print {
-  #resumePreviewContent {
-    zoom: 1 !important;
-    padding: 0;
-    max-width: 100%;
-    overflow: visible !important;
+  @page {
+    size: A4 portrait;
+    margin: 0.6cm;
   }
-  
+
+  html {
+    width: 210mm;
+    height: 297mm;
+  }
+
   body {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 !important;
+    padding: 0 !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    color-adjust: exact;
     background: white !important;
+  }
+
+  #resumePreviewContent {
+    zoom: 1 !important;
+    width: 100% !important;
+    min-height: 297mm !important;
+    padding: 0.6cm !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+    overflow: visible !important;
   }
 }
 
@@ -107,10 +125,6 @@ body {
   font-family: Inter;
 }
 
-@page {
-  size: A4;
-  margin: 0.6cm;
-}
 .myCVLogo
 {
 max-width: none !important;
