@@ -5,12 +5,13 @@ import { ResumeServerData } from "@/lib/types";
 import { cn, mapToResumeValues } from "@/lib/utils";
 import { ResumeValues } from "@/lib/validation";
 import { useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import Footer from "./Footer";
 import ResumePreviewSection from "./ResumePreviewSection";
 import { steps } from "./steps";
 import useAutoSaveResume from "./useAutoSaveResume";
+import useWindowSize from "@/hooks/useWindowSize";
 
 interface ResumeEditorProps {
   resumeToEdit: ResumeServerData | null;
@@ -18,6 +19,8 @@ interface ResumeEditorProps {
 
 export default function ResumeEditor({ resumeToEdit }: ResumeEditorProps) {
   const searchParams = useSearchParams();
+  const { width } = useWindowSize();
+  const isMobileScreen = width < 720;
 
   const initialData = resumeToEdit ? mapToResumeValues(resumeToEdit) : {};
   const [resumeData, setResumeData] = useState<ResumeValues>(initialData);
@@ -28,6 +31,18 @@ export default function ResumeEditor({ resumeToEdit }: ResumeEditorProps) {
   const { isSaving, hasUnsavedChanges } = useAutoSaveResume(resumeData);
 
   useUnloadWarning(hasUnsavedChanges);
+
+  useEffect(() => {
+    if (isMobileScreen) {
+      document.body.classList.add('editor-mobile-view');
+    } else {
+      document.body.classList.remove('editor-mobile-view');
+    }
+    
+    return () => {
+      document.body.classList.remove('editor-mobile-view');
+    };
+  }, [isMobileScreen]);
 
   const currentStep = searchParams.get("step") || steps[0].key;
 
@@ -43,13 +58,17 @@ export default function ResumeEditor({ resumeToEdit }: ResumeEditorProps) {
 
   return (
     <div className="flex grow flex-col">
-      <header className="space-y-1.5 border-b px-3 py-5 text-center">
-        <h1 className="text-2xl font-bold">Design your CV</h1>
-        <p className="text-sm text-muted-foreground">
-          Follow the steps below to create your CV. Your progress will be
-          saved automatically.
-        </p>
-      </header>
+      {
+        !isMobileScreen && (
+        <header id="header-5000" className="space-y-1.5 border-b px-3 py-5 text-center">
+          <h1 className="text-2xl font-bold">Design your CV</h1>
+          <p className="text-sm text-muted-foreground">
+            Follow the steps below to create your CV. Your progress will be
+            saved automatically.
+          </p>
+        </header>
+        )
+      }
       <main className="relative grow">
         <div className="absolute bottom-0 top-0 flex w-full">
           <div
