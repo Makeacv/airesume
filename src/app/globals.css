@@ -125,7 +125,15 @@ body {
   font-family: Inter;
 }
 
-.myCVLogo
-{
-max-width: none !important;
+.myCVLogo {
+  max-width: none !important;
+}
+
+body.editor-mobile-view header#header-5000,
+body.editor-mobile-view footer {
+  display: none !important;
+}
+
+body.editor-mobile-view main {
+  min-height: 100vh;
 }
