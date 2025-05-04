@@ -18,6 +18,13 @@ module.exports = {
         'Host: makeacv.ai',
         'Sitemap: https://makeacv.ai/sitemap.xml'
       ]
+    },
+    additionalPaths: async () => {
+      return [
+        { loc: '/', changefreq: 'daily', priority: 0.6 },
+        { loc: '/about', changefreq: 'weekly', priority: 0.5 },
+        { loc: '/blog', changefreq: 'daily', priority: 0.8 },
+      ];
     }
   }
   
