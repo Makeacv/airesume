@@ -16,6 +16,25 @@ interface QuillEditorProps {
   onSelectionChange?: (range: QuillRange, oldRange: QuillRange, source: QuillSource) => void;
 }
 
+// Override link blot to add protocol and open links in a new tab
+const Link: any = Quill.import('formats/link');
+const originalSanitize = Link.sanitize;
+Link.sanitize = function(url: string) {
+  url = originalSanitize.call(this, url);
+  if (!/^(?:https?:\/\/|mailto:|tel:)/i.test(url)) {
+    url = 'https://' + url;
+  }
+  return url;
+};
+const originalCreate = Link.create;
+Link.create = function(value: any) {
+  const node = originalCreate.call(this, value);
+  node.setAttribute('target', '_blank');
+  node.setAttribute('rel', 'noopener noreferrer');
+  return node;
+};
+Quill.register('formats/link', Link, true);
+
 const QuillEditor = forwardRef<Quill, QuillEditorProps>(
   ({ readOnly = false, defaultValue, onTextChange, onSelectionChange }, ref) => {
     const containerRef = useRef<HTMLElement | null>(null);
