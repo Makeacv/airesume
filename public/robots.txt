@@ -1,8 +1,8 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /admin/
-Disallow: /api/
+Disallow: /admin
+Disallow: /api
 
 # Googlebot
 User-agent: Googlebot
@@ -12,12 +12,8 @@ Allow: /
 User-agent: AdsBot-Google
 Allow: /
 
-# Bingbot
-User-agent: Bingbot
-Allow: /
-
 # Host
-Host: makeacv.ai
+Host: https://makeacv.ai
 
 # Sitemaps
 Sitemap: https://makeacv.ai/sitemap.xml
