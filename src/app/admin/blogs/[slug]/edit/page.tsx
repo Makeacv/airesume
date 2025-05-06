@@ -14,8 +14,11 @@ interface PostData {
   date: string;
   slug: string;
   coverImage?: string;
+  coverImageAlt?: string;
   author?: string;
   published?: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
 }
 
 export default function EditBlogPost() {
@@ -43,8 +46,11 @@ export default function EditBlogPost() {
           date: blog.date ? new Date(blog.date).toISOString().split("T")[0] : new Date().toISOString().split("T")[0],
           slug: blog.slug,
           coverImage: blog.coverImage,
+          coverImageAlt: blog.coverImageAlt,
           author: blog.author,
-          published: blog.published
+          published: blog.published,
+          metaTitle: blog.metaTitle,
+          metaDescription: blog.metaDescription
         });
       } catch (error) {
         console.error("Error fetching post:", error);

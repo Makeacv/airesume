@@ -56,6 +56,8 @@ export function BlogEditor({ mode, initialData }: BlogEditorProps) {
     }
   };
 
+  console.log(initialData, "initialData");
+
   const [formData, setFormData] = useState({
     title: initialData?.title || "",
     slug: initialData?.slug || "",
