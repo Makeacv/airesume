@@ -7,6 +7,11 @@ module.exports = {
     exclude: [
       '/admin/**',
       '/api/**',
+      '/sign-in/**',
+      '/sign-up/**',
+      '/billing',
+      '/editor',
+      '/resumes',
     ],
     robotsTxtOptions: {
       policies: [
