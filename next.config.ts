@@ -14,11 +14,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  rewrites: async () => {
+  async headers() {
     return [
       {
-        source: "/sitemap",
-        destination: "/sitemap-0.xml",
+        source: "/:path*",
+        headers: [
+          {
+            key: "X-Robots-Tag",
+            value: "all",
+          },
+        ],
       },
     ];
   },

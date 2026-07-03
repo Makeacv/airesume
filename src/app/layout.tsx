@@ -6,13 +6,16 @@ import Script from "next/script";
 import "./globals.css";
 import Footer from "@/components/Footer";
 
-
 import LayoutWithNavbar from "@/components/layout/LayoutWithNavbar"; // ✅ new wrapper
 import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://makeacv.ai"),
+  alternates: {
+    canonical: "/",
+  },
   title: {
     template: "%s - AI CV Builder",
     absolute: "Free CV Builder South Africa | Fast & Easy AI Tool | Make A CV",
@@ -30,8 +33,11 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <head>
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6307334884532063"
-            crossOrigin="anonymous"></script>
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6307334884532063"
+            crossOrigin="anonymous"
+          ></script>
           <Script
             strategy="afterInteractive"
             src="https://www.googletagmanager.com/gtag/js?id=G-G92NEJQXZG"
@@ -47,7 +53,12 @@ export default function RootLayout({
           <link rel="icon" href="/favicon.ico" sizes="any" />
         </head>
         <body className={inter.className}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             <LayoutWithNavbar>{children}</LayoutWithNavbar>
             <Toaster />
           </ThemeProvider>

@@ -3,6 +3,9 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /api
+Disallow: /editor
+Disallow: /resumes
+Disallow: /billing
 
 # Googlebot
 User-agent: Googlebot
