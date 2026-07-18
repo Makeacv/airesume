@@ -1,22 +1,24 @@
-# *
 User-agent: *
 Allow: /
-Disallow: /admin
-Disallow: /api
-Disallow: /editor
-Disallow: /resumes
-Disallow: /billing
+Disallow: /admin/
+Disallow: /api/
+Disallow: /editor/
+Disallow: /resumes/
+Disallow: /billing/
+Disallow: /sign-in/
+Disallow: /sign-up/
 
-# Googlebot
 User-agent: Googlebot
 Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /editor/
+Disallow: /resumes/
+Disallow: /billing/
+Disallow: /sign-in/
+Disallow: /sign-up/
 
-# AdsBot-Google
 User-agent: AdsBot-Google
 Allow: /
 
-# Host
-Host: https://makeacv.ai
-
-# Sitemaps
 Sitemap: https://makeacv.ai/sitemap.xml

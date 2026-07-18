@@ -2,7 +2,8 @@ module.exports = {
   siteUrl: 'https://makeacv.ai',
   changefreq: 'daily',
   priority: 0.7,
-  generateRobotsTxt: true,
+  generateRobotsTxt: false, // We manage robots.txt manually in /public
+  generateIndexSitemap: false, // Single sitemap file, no index+child split
   sitemapSize: 10000,
   exclude: [
     '/admin/**',
@@ -15,13 +16,6 @@ module.exports = {
     '/opengraph-image*',
     '/favicon.ico',
   ],
-  robotsTxtOptions: {
-    policies: [
-      { userAgent: '*', allow: '/', disallow: ['/admin', '/api', '/editor', '/resumes', '/billing'] },
-      { userAgent: 'Googlebot', allow: '/' },
-      { userAgent: 'AdsBot-Google', allow: '/' }
-    ],
-  },
   additionalPaths: async () => {
     return [
       { loc: '/', changefreq: 'daily', priority: 1.0 },

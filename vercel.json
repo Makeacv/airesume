@@ -5,7 +5,16 @@
       "headers": [
         {
           "key": "X-Robots-Tag",
-          "value": "all"
+          "value": "index, follow"
+        }
+      ]
+    },
+    {
+      "source": "/(sign-in|sign-up|editor|resumes|billing|admin|api)(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
         }
       ]
     }
